@@ -21,8 +21,8 @@ contract Collection{
     function _createCol(string name, string desc, uint price, string imgLink) public{
     	state++;
     	uint id = colls.push(Collectible(name, desc, imgLink, price));
-    	colToOwner[id] = msg.sender;
     	creators[id] = msg.sender;
+    	collectibleToOwner[id] = msg.sender;
         ownerColCount[msg.sender]++;
     }
 
@@ -31,5 +31,8 @@ contract Collection{
     }
 
 }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 11b74084d250b3de22ff10558d1fb6c80feed054
