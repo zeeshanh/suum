@@ -4,6 +4,9 @@ import Collection from '../build/contracts/Collection.json'
 import Collectible from '../build/contracts/Collectible.json'
 import getWeb3 from './utils/getWeb3'
 
+import CollectibleFront from './CollectibleFront';
+import CollectibleBack from './CollectibleBack';
+
 import './css/oswald.css'
 import './css/open-sans.css'
 import './css/pure-min.css'
@@ -56,17 +59,13 @@ class App extends Component {
 
     // Declaring this for later so we can chain functions on SimpleStorage.
     var simpleStorageInstance
-<<<<<<< HEAD
     var collectionInstance
-=======
-    var collectionInstance 
     var collectibleInstance
->>>>>>> 48e2e0adb3985d8dde3cb003cd52b7d68be7a313
 
 
     // // Get accounts.
       this.state.web3.eth.getAccounts((error, accounts) => {
-     
+
 
       collection.deployed().then((instance) => {
         collectionInstance = instance
@@ -125,6 +124,9 @@ class App extends Component {
               <p>The stored value is: {this.state.storageValue}</p>
               <button>Create New Collectible</button>
             </div>
+          </div>
+          <div>
+
           </div>
         </main>
       </div>
