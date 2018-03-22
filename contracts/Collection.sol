@@ -5,7 +5,9 @@ contract Collection{
 	struct Collectible{
 		string name;
 		string desc;
-		string imgLink;
+		string collectibleImage;
+		string collectibleVideo;
+		string collectibleSong;
 		uint price;
 
 	}
@@ -15,18 +17,16 @@ contract Collection{
 		_;
 	}
 
-	Collectible[] public colls;
+	Collectible[] public collectibles;
 
-	uint public state;
 	mapping (uint => Collectible) public Collectibles;
     mapping (uint => address) public collectibleToOwner;
     mapping (address => uint) ownerCollectibleCount;
 
-    function _createCol(string name, string desc, uint price, string imgLink) public{
-    	state++;
-    	uint id = colls.push(Collectible(name, desc, imgLink, price));
+    function _createCol(string name, string desc, uint price, string collectibleImage) public{
+    	uint id = collectibles.push(Collectible(name, desc, collectibleImage, price));
     	collectibleToOwner[id] = msg.sender;
-        ownerCollectibleCount[msg.sender]++;
+      ownerCollectibleCount[msg.sender]++;
     }
 
     function getCol() public view returns (uint) {

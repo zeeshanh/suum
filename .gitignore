@@ -1,0 +1,7 @@
+*.log
+logs
+npm-debug.log*
+package-lock.json
+build
+node_modules
+front/bundle
