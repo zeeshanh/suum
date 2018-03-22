@@ -19,12 +19,14 @@ contract Collection{
 
 	Collectible[] public collectibles;
 
+	mapping (uint => address) public creators;
 	mapping (uint => Collectible) public Collectibles;
     mapping (uint => address) public collectibleToOwner;
     mapping (address => uint) ownerCollectibleCount;
 
     function _createCol(string name, string desc, uint price, string collectibleImage) public{
     	uint id = collectibles.push(Collectible(name, desc, collectibleImage, price));
+			creators[id] = msg.sender;
     	collectibleToOwner[id] = msg.sender;
       ownerCollectibleCount[msg.sender]++;
     }

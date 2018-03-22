@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import SimpleStorageContract from '../build/contracts/SimpleStorage.json'
 import Collection from '../build/contracts/Collection.json'
+import Collectible from '../build/contracts/Collectible.json'
 import getWeb3 from './utils/getWeb3'
 
 import './css/oswald.css'
@@ -47,36 +48,53 @@ class App extends Component {
     const contract = require('truffle-contract')
     const simpleStorage = contract(SimpleStorageContract)
     const collection = contract(Collection)
+    const collectible = contract(Collectible)
 
     simpleStorage.setProvider(this.state.web3.currentProvider)
     collection.setProvider(this.state.web3.currentProvider)
+    collectible.setProvider(this.state.web3.currentProvider)
 
     // Declaring this for later so we can chain functions on SimpleStorage.
     var simpleStorageInstance
+<<<<<<< HEAD
     var collectionInstance
+=======
+    var collectionInstance 
+    var collectibleInstance
+>>>>>>> 48e2e0adb3985d8dde3cb003cd52b7d68be7a313
 
 
     // // Get accounts.
-     this.state.web3.eth.getAccounts((error, accounts) => {
+      this.state.web3.eth.getAccounts((error, accounts) => {
+     
+
       collection.deployed().then((instance) => {
         collectionInstance = instance
 
-        return collectionInstance._createCol("Dino", "Dinosaur collectible", 50, "https://res.cloudinary.com/dk-find-out/image/upload/q_80,w_1920,f_auto/AllosaurusLayers_vvi6q7.jpg", {from: accounts[0]})
-      }).then((result) => {
+      //   return collectionInstance._createCol("Dino", "Dinosaur collectible", 50, "https://res.cloudinary.com/dk-find-out/image/upload/q_80,w_1920,f_auto/AllosaurusLayers_vvi6q7.jpg", {from: accounts[0]})
+      // }).then((result) => {
 
-       //   return collectionInstance.getCol.call(accounts[0])
-       // }).then((result) => {
-       //  console.log(typeof result)
-       //  console.log(result)
+         return collectionInstance.Collectibles.call(accounts[0])
+       }).then((result) => {
+        console.log(typeof result)
+        console.log(result)
         })
+
+       collectible.deployed().then((instance) =>{
+        collectibleInstance = instance
+
+        return collectibleInstance.balanceOf.call(accounts[0])
+       }).then((result) => {
+        console.log(result);
+       })
 
 
       simpleStorage.deployed().then((instance) => {
         simpleStorageInstance = instance
 
         // Stores a given value, 5 by default.
-        return simpleStorageInstance.set(50, {from: accounts[0]})
-      }).then((result) => {
+      //   return simpleStorageInstance.set(50, {from: accounts[0]})
+      // }).then((result) => {
         // Get the value from the contract to prove it worked.
         return simpleStorageInstance.get.call(accounts[0])
       }).then((result) => {
