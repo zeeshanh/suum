@@ -5,7 +5,9 @@ contract Collection{
 	struct Collectible{
 		string name;
 		string desc;
-		string imgLink;
+		string collectibleImage;
+		string collectibleVideo;
+		string collectibleSong;
 		uint price;
 
 	}
@@ -26,7 +28,7 @@ contract Collection{
     	uint id = collectibles.push(Collectible(name, desc, imgLink, price));
     	creators[id] = msg.sender;
     	collectibleToOwner[id] = msg.sender;
-        ownerCollectibleCount[msg.sender]++;
+      ownerCollectibleCount[msg.sender]++;
     }
 
     function getCol() public view returns (uint) {

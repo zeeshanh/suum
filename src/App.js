@@ -59,7 +59,6 @@ class App extends Component {
     var collectionInstance 
     var collectibleInstance
 
-
     // // Get accounts.
       this.state.web3.eth.getAccounts((error, accounts) => {
      
@@ -119,6 +118,7 @@ class App extends Component {
               <p>If your contracts compiled and migrated successfully, below will show a stored value of 5 (by default).</p>
               <p>Try changing the value stored on <strong>line 59</strong> of App.js.</p>
               <p>The stored value is: {this.state.storageValue}</p>
+              <button>Create New Collectible</button>
             </div>
           </div>
         </main>
