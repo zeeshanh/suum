@@ -57,17 +57,19 @@ class App extends Component {
 
 
     // // Get accounts.
-     this.state.web3.eth.getAccounts((error, accounts) => {
+      this.state.web3.eth.getAccounts((error, accounts) => {
+     
+
       collection.deployed().then((instance) => {
         collectionInstance = instance
 
         return collectionInstance._createCol("Dino", "Dinosaur collectible", 50, "https://res.cloudinary.com/dk-find-out/image/upload/q_80,w_1920,f_auto/AllosaurusLayers_vvi6q7.jpg", {from: accounts[0]})
       }).then((result) => {
 
-       //   return collectionInstance.getCol.call(accounts[0])
-       // }).then((result) => {
-       //  console.log(typeof result)
-       //  console.log(result)
+         return collectionInstance.Collectibles.call(accounts[0])
+       }).then((result) => {
+        console.log(typeof result)
+        console.log(result)
         })
 
 
