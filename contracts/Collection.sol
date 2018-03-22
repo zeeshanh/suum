@@ -15,17 +15,15 @@ contract Collection{
 		_;
 	}
 
-	Collectible[] public colls;
+	Collectible[] public collectibles;
 
-	uint public state;
 	mapping (uint => address) public creators;
 	mapping (uint => Collectible) public Collectibles;
     mapping (uint => address) public collectibleToOwner;
     mapping (address => uint) ownerCollectibleCount;
 
     function _createCol(string name, string desc, uint price, string imgLink) public{
-    	state++;
-    	uint id = colls.push(Collectible(name, desc, imgLink, price));
+    	uint id = collectibles.push(Collectible(name, desc, imgLink, price));
     	creators[id] = msg.sender;
     	collectibleToOwner[id] = msg.sender;
         ownerCollectibleCount[msg.sender]++;
