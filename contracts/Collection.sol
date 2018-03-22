@@ -31,8 +31,3 @@ contract Collection{
     }
 
 }
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 11b74084d250b3de22ff10558d1fb6c80feed054
