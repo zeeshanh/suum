@@ -52,6 +52,7 @@ class App extends Component {
 
     simpleStorage.setProvider(this.state.web3.currentProvider)
     collection.setProvider(this.state.web3.currentProvider)
+    collectible.setProvider(this.state.web3.currentProvider)
 
     // Declaring this for later so we can chain functions on SimpleStorage.
     var simpleStorageInstance
