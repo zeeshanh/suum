@@ -14,13 +14,13 @@ contract Collection{
 
 	uint public state;
 	mapping (uint => Collectible) public Collectibles;
-    mapping (uint => address) public colToOwner;
+    mapping (uint => address) public collectibleToOwner;
     mapping (address => uint) ownerColCount;
 
     function _createCol(string name, string desc, uint price, string imgLink) public{
     	state++;
     	uint id = colls.push(Collectible(name, desc, imgLink, price));
-    	colToOwner[id] = msg.sender;
+    	collectibleToOwner[id] = msg.sender;
         ownerColCount[msg.sender]++;
     }
 
@@ -29,6 +29,3 @@ contract Collection{
     }
 
 }
-
-
-
