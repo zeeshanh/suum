@@ -54,6 +54,7 @@ class App extends Component {
     collection.setProvider(this.state.web3.currentProvider)
     collectible.setProvider(this.state.web3.currentProvider)
 
+
     // Declaring this for later so we can chain functions on SimpleStorage.
     var simpleStorageInstance
     var collectionInstance 
@@ -65,6 +66,10 @@ class App extends Component {
 
       collection.deployed().then((instance) => {
         collectionInstance = instance
+
+        this.setState({
+          collectionInstance: instance
+        })
 
       //   return collectionInstance._createCol("Dino", "Dinosaur collectible", 50, "https://res.cloudinary.com/dk-find-out/image/upload/q_80,w_1920,f_auto/AllosaurusLayers_vvi6q7.jpg", {from: accounts[0]})
       // }).then((result) => {
