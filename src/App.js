@@ -24,7 +24,7 @@ class App extends Component {
       collectibles: [],
       storageValue: 0,
       web3: null,
-      collectionInstance: null
+      collectionInstance:null
     }
   }
 
@@ -73,11 +73,17 @@ class App extends Component {
       collection.deployed().then((instance) => {
         console.log("DEPOLYED")
         collectionInstance = instance
-
         this.setState({collectionInstance: instance})
-        // return collectionInstance._createCol("Test", "Busy Earnin by Jungle", "https://images.genius.com/a7476d42435ba6e34c7015fcb635cca6.1000x1000x1.jpg", "https://www.youtube.com/watch?v=BcsfftwLUf0", 10, {from: accounts[0]})
 
-      }).then((result) => {
+        //collectionInstance._createCol("Innerbloom", "Innerbloom by Rufus du Sol", "https://images.genius.com/a7476d42435ba6e34c7015fcb635cca6.1000x1000x1.jpg", "https://www.youtube.com/watch?v=IA1liCmUsAM", 10, {from:accounts[0]})
+
+
+        // collectionInstance._createCol("Busy Earnin", "Busy Earnin by Jungle", "https://images.genius.com/e64c86234196aea00f6fe89923861476.1000x1000x1.jpg", "https://www.youtube.com/watch?v=BcsfftwLUf0", 10, {from: accounts[0]})
+        // return collectionInstance._createCol("Innerbloom", "Innerbloom by Rufus du Sol", "https://images.genius.com/a7476d42435ba6e34c7015fcb635cca6.1000x1000x1.jpg", "https://www.youtube.com/watch?v=IA1liCmUsAM", 10, {from: accounts[0]})
+
+        // return collectionInstance.Collectibles.call(accounts[0])
+      //}).then((result) => {
+       // console.log('TEST')
         return collectionInstance.getCollectiblesLength()
       }).then((result) => {
         console.log('Huh..')
@@ -99,7 +105,8 @@ class App extends Component {
         collectibleInstance = instance
         return collectibleInstance.balanceOf.call(accounts[0])
       }).then((result) => {
-        // console.log(result);
+
+        console.log(result.c[0]);
       })
 
     })

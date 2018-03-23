@@ -41,7 +41,7 @@ class CreateCollectible extends React.Component {
     else{
       event.preventDefault();
       this.props.web3.eth.getAccounts((error, accounts) => {
-      this.props.collectionInstance._createCol(this.state.Name,this.state.desc, this.state.price, this.state.imgLink, {from: accounts[0]});
+      this.props.collectionInstance._createCol(this.state.Name,this.state.desc, this.state.imgLink, "", this.state.price, {from: accounts[0]});
       })
     }
   }
