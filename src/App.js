@@ -72,16 +72,13 @@ class App extends Component {
 
         this.setState({collectionInstance: instance})
 
-<<<<<<< HEAD
         // return collectionInstance._createCol("Dino", "Dinosaur collectible", 50, "https://res.cloudinary.com/dk-find-out/image/upload/q_80,w_1920,f_auto/AllosaurusLayers_vvi6q7.jpg", {from: accounts[0]})
       // }).then((result) => {
-=======
-        collectionInstance._createCol("Innerbloom", "Innerbloom by Rufus du Sol", "https://images.genius.com/a7476d42435ba6e34c7015fcb635cca6.1000x1000x1.jpg", "https://www.youtube.com/watch?v=IA1liCmUsAM", 10)
->>>>>>> c8f9f4ee839b16f71e4972935c804825e96ffca2
+        collectionInstance._createCol("Innerbloom", "Innerbloom by Rufus du Sol", "https://images.genius.com/a7476d42435ba6e34c7015fcb635cca6.1000x1000x1.jpg", "https://www.youtube.com/watch?v=IA1liCmUsAM", 10, {from:accounts[0]})
 
-        return collectionInstance.Collectibles.call(accounts[0])
+        //return collectionInstance.Collectibles.call(accounts[0])
       }).then((result) => {
-        this.state.collectionInstance.getCollectiblesLength().call()
+        this.state.collectionInstance.getCollectiblesLength()
       }).then((result) => {
         console.log("Length of Collectibles:", result)
       })
@@ -91,21 +88,7 @@ class App extends Component {
 
         return collectibleInstance.balanceOf.call(accounts[0])
       }).then((result) => {
-        console.log(result);
-      })
-
-      simpleStorage.deployed().then((instance) => {
-        simpleStorageInstance = instance
-
-        // Stores a given value, 5 by default.
-        //   return simpleStorageInstance.set(50, {from: accounts[0]})
-        // }).then((result) => {
-        // Get the value from the contract to prove it worked.
-        return simpleStorageInstance.get.call(accounts[0])
-      }).then((result) => {
-        console.log(result);
-        // Update state with the result.
-        return this.setState({storageValue: result.c[0]})
+        console.log(result.c[0]);
       })
 
     })
