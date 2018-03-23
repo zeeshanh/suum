@@ -1,7 +1,9 @@
+import React, {Component} from 'react';
+
 class CollectibleFront extends Component {
-  constructor(props) {
-    super(props)
-  }
+  // constructor(props) {
+  //   super(props)
+  // }
 
   componentWillMount() {
 
@@ -10,7 +12,7 @@ class CollectibleFront extends Component {
   render() {
     return (
       <div className="CollectibleFront">
-        <img src={this.props.collectible.image} height="375" width="275"></img>
+        <img src={this.props.image} height="375" width="275" alt="Missing..."></img>
       </div>
     );
   }

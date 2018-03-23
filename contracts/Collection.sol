@@ -9,7 +9,6 @@ contract Collection{
 		// this can be a link to a video, song, etc.
 		string collectibleExtraContent;
 		uint price;
-
 	}
 
 	modifier onlyOwnerOf(uint _collectibleId) {
@@ -21,22 +20,22 @@ contract Collection{
 
 	mapping (uint => address) public creators;
 	mapping (uint => Collectible) public Collectibles;
-    mapping (uint => address) public collectibleToOwner;
-    mapping (address => uint) ownerCollectibleCount;
+  mapping (uint => address) public collectibleToOwner;
+  mapping (address => uint) ownerCollectibleCount;
 
-    function _createCol(string name, string desc, string collectibleImage, string collectibleExtraContent, uint price) public {
-    	uint id = collectibles.push(Collectible(name, desc, collectibleImage, collectibleExtraContent, price));
-			creators[id] = msg.sender;
-    	collectibleToOwner[id] = msg.sender;
-      ownerCollectibleCount[msg.sender]++;
-    }
+  function _createCol(string name, string desc, string collectibleImage, string collectibleExtraContent, uint price) public {
+  	uint id = collectibles.push(Collectible(name, desc, collectibleImage, collectibleExtraContent, price));
+		creators[id] = msg.sender;
+  	collectibleToOwner[id] = msg.sender;
+    ownerCollectibleCount[msg.sender]++;
+  }
 
-		function getCollectiblesLength() public view returns(uint length){
-			return collectibles.length;
-		}
+	function getCollectiblesLength() public view returns(uint length){
+		return collectibles.length;
+	}
 
-		function getCollectibleByIndex(uint _collectibleIndex) public view returns (string, string, string, string, uint){
-			return (collectibles[_collectibleIndex].name, collectibles[_collectibleIndex].desc, collectibles[_collectibleIndex].collectibleImage, collectibles[_collectibleIndex].collectibleExtraContent, collectibles[_collectibleIndex].price);
-		}
+	function getCollectibleByIndex(uint _collectibleIndex) public view returns (string name, string, string, string, uint){
+		return (collectibles[_collectibleIndex].name, collectibles[_collectibleIndex].desc, collectibles[_collectibleIndex].collectibleImage, collectibles[_collectibleIndex].collectibleExtraContent, collectibles[_collectibleIndex].price);
+	}
 
 }

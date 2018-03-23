@@ -17,6 +17,7 @@ class App extends Component {
     super(props)
 
     this.state = {
+      collectibles: [],
       storageValue: 0,
       web3: null
     }
@@ -27,7 +28,9 @@ class App extends Component {
     // See utils/getWeb3 for more info.
 
     getWeb3.then(results => {
+      console.log('WEB3', results.web3)
       this.setState({web3: results.web3})
+
 
       // Instantiate contract once web3 provided.
       this.instantiateContract()
@@ -57,22 +60,45 @@ class App extends Component {
     var simpleStorageInstance
     var collectionInstance
     var collectibleInstance
+    var localCollectibles = [];
+    var collectiblePromises = [];
 
     // // Get accounts.
     this.state.web3.eth.getAccounts((error, accounts) => {
 
-      collection.deployed().then((instance) => {
+
+      collection.deployed()
+      .then((instance) => {
+        console.log("DEPOLYED")
         collectionInstance = instance
 
-        this.setState({collectionInstance: instance})
+        // this.setState({collectionInstance: instance})
+        // collectionInstance._createCol("Busy Earnin", "Busy Earnin by Jungle", "https://images.genius.com/e64c86234196aea00f6fe89923861476.1000x1000x1.jpg", "https://www.youtube.com/watch?v=BcsfftwLUf0", 10, {from: accounts[0]})
+        // return collectionInstance._createCol("Innerbloom", "Innerbloom by Rufus du Sol", "https://images.genius.com/a7476d42435ba6e34c7015fcb635cca6.1000x1000x1.jpg", "https://www.youtube.com/watch?v=IA1liCmUsAM", 10, {from: accounts[0]})
 
-        collectionInstance._createCol("Innerbloom", "Innerbloom by Rufus du Sol", "https://images.genius.com/a7476d42435ba6e34c7015fcb635cca6.1000x1000x1.jpg", "https://www.youtube.com/watch?v=IA1liCmUsAM", 10)
+        // return collectionInstance.Collectibles.call(accounts[0])
+      }).then((result) => {
+        console.log('TEST')
+        return collectionInstance.getCollectiblesLength()
+      }).then((result) => {
+        var lengthOfCollectibles = result.c[0];
 
-        return collectionInstance.Collectibles.call(accounts[0])
-      }).then((result) => {
-        this.state.collectionInstance.getCollectiblesLength().call()
-      }).then((result) => {
-        console.log("Length of Collectibles:", result)
+        for(var i = 0; i < lengthOfCollectibles; i++) {
+          var localPromise = collectionInstance.getCollectibleByIndex(i)
+          collectiblePromises.push(localPromise);
+        }
+        console.log("Length of Collectibles:", lengthOfCollectibles)
+        return collectionInstance.getCollectibleByIndex(0);
+      })
+      .then(result => {
+        localCollectibles.push(result)
+        console.log("Local Collectibles:", localCollectibles)
+        console.log('Collect?', result)
+        return Promise.all(collectiblePromises)
+      })
+      .then(values => {
+        console.log("PROMISE VALUES", values)
+        this.setState({collectibles: values})
       })
 
       collectible.deployed().then((instance) => {
@@ -80,7 +106,7 @@ class App extends Component {
 
         return collectibleInstance.balanceOf.call(accounts[0])
       }).then((result) => {
-        console.log(result);
+        // console.log(result);
       })
 
       simpleStorage.deployed().then((instance) => {
@@ -92,7 +118,7 @@ class App extends Component {
         // Get the value from the contract to prove it worked.
         return simpleStorageInstance.get.call(accounts[0])
       }).then((result) => {
-        console.log(result);
+        // console.log(result);
         // Update state with the result.
         return this.setState({storageValue: result.c[0]})
       })
@@ -109,20 +135,11 @@ class App extends Component {
         </nav>
 
         <main className="container">
-          <div className="pure-g">
-            <div className="pure-u-1-1">
-              <h1>Good to Go!</h1>
-              <p>Your Truffle Box is installed and ready.</p>
-              <h2>Smart Contract Example</h2>
-              <p>If your contracts compiled and migrated successfully, below will show a stored value of 5 (by default).</p>
-              <p>Try changing the value stored on
-                <strong>line 59</strong>
-                of App.js.</p>
-              <p>The stored value is: {this.state.storageValue}</p>
-              <button>Create New Collectible</button>
-            </div>
+          <div>
+            {this.state.collectibles.length > 0 ? this.state.collectibles.map((collectibleArr, i) => {
+              return <CollectibleFront key={i} image={collectibleArr[2]} />
+            }) : "Loading..."}
           </div>
-          <div></div>
         </main>
       </div>
     );
