@@ -6,8 +6,8 @@ contract Collection{
 		string name;
 		string desc;
 		string collectibleImage;
-		string collectibleVideo;
-		string collectibleSong;
+		// this can be a link to a video, song, etc.
+		string collectibleExtraContent;
 		uint price;
 
 	}
@@ -24,15 +24,19 @@ contract Collection{
     mapping (uint => address) public collectibleToOwner;
     mapping (address => uint) ownerCollectibleCount;
 
-    function _createCol(string name, string desc, uint price, string imgLink) public{
-    	uint id = collectibles.push(Collectible(name, desc, imgLink, price));
-    	creators[id] = msg.sender;
+    function _createCol(string name, string desc, string collectibleImage, string collectibleExtraContent, uint price) public {
+    	uint id = collectibles.push(Collectible(name, desc, collectibleImage, collectibleExtraContent, price));
+			creators[id] = msg.sender;
     	collectibleToOwner[id] = msg.sender;
       ownerCollectibleCount[msg.sender]++;
     }
 
-    function getCol() public view returns (uint) {
-    	return state;
-    }
+		function getCollectiblesLength() public view returns(uint length){
+			return collectibles.length;
+		}
+
+		function getCollectibleByIndex(uint _collectibleIndex) public view returns (string, string, string, string, uint){
+			return (collectibles[_collectibleIndex].name, collectibles[_collectibleIndex].desc, collectibles[_collectibleIndex].collectibleImage, collectibles[_collectibleIndex].collectibleExtraContent, collectibles[_collectibleIndex].price);
+		}
 
 }

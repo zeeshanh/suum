@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import SimpleStorageContract from '../build/contracts/SimpleStorage.json'
 import Collection from '../build/contracts/Collection.json'
 import Collectible from '../build/contracts/Collectible.json'
@@ -8,6 +8,9 @@ import { Link, Route, Switch } from 'react-router-dom';
 // react-dom (what we'll use here)
 
 
+
+import CollectibleFront from './CollectibleFront';
+import CollectibleBack from './CollectibleBack';
 
 import './css/oswald.css'
 import './css/open-sans.css'
@@ -29,16 +32,12 @@ class App extends Component {
     // Get network provider and web3 instance.
     // See utils/getWeb3 for more info.
 
-    getWeb3
-    .then(results => {
-      this.setState({
-        web3: results.web3
-      })
+    getWeb3.then(results => {
+      this.setState({web3: results.web3})
 
       // Instantiate contract once web3 provided.
       this.instantiateContract()
-    })
-    .catch(() => {
+    }).catch(() => {
       console.log('Error finding web3.')
     })
   }
@@ -60,53 +59,53 @@ class App extends Component {
     collection.setProvider(this.state.web3.currentProvider)
     collectible.setProvider(this.state.web3.currentProvider)
 
-
     // Declaring this for later so we can chain functions on SimpleStorage.
     var simpleStorageInstance
-    var collectionInstance 
+    var collectionInstance
     var collectibleInstance
 
     // // Get accounts.
-      this.state.web3.eth.getAccounts((error, accounts) => {
-     
+    this.state.web3.eth.getAccounts((error, accounts) => {
 
       collection.deployed().then((instance) => {
         collectionInstance = instance
 
-        this.setState({
-          collectionInstance: instance
-        })
+        this.setState({collectionInstance: instance})
 
+<<<<<<< HEAD
         // return collectionInstance._createCol("Dino", "Dinosaur collectible", 50, "https://res.cloudinary.com/dk-find-out/image/upload/q_80,w_1920,f_auto/AllosaurusLayers_vvi6q7.jpg", {from: accounts[0]})
       // }).then((result) => {
+=======
+        collectionInstance._createCol("Innerbloom", "Innerbloom by Rufus du Sol", "https://images.genius.com/a7476d42435ba6e34c7015fcb635cca6.1000x1000x1.jpg", "https://www.youtube.com/watch?v=IA1liCmUsAM", 10)
+>>>>>>> c8f9f4ee839b16f71e4972935c804825e96ffca2
 
-         return collectionInstance.Collectibles.call(accounts[0])
-       }).then((result) => {
-        console.log(typeof result)
-        console.log(result)
-        })
+        return collectionInstance.Collectibles.call(accounts[0])
+      }).then((result) => {
+        this.state.collectionInstance.getCollectiblesLength().call()
+      }).then((result) => {
+        console.log("Length of Collectibles:", result)
+      })
 
-       collectible.deployed().then((instance) =>{
+      collectible.deployed().then((instance) => {
         collectibleInstance = instance
 
         return collectibleInstance.balanceOf.call(accounts[0])
-       }).then((result) => {
+      }).then((result) => {
         console.log(result);
-       })
-
+      })
 
       simpleStorage.deployed().then((instance) => {
         simpleStorageInstance = instance
 
         // Stores a given value, 5 by default.
-      //   return simpleStorageInstance.set(50, {from: accounts[0]})
-      // }).then((result) => {
+        //   return simpleStorageInstance.set(50, {from: accounts[0]})
+        // }).then((result) => {
         // Get the value from the contract to prove it worked.
         return simpleStorageInstance.get.call(accounts[0])
       }).then((result) => {
         console.log(result);
         // Update state with the result.
-        return this.setState({ storageValue: result.c[0] })
+        return this.setState({storageValue: result.c[0]})
       })
 
     })
@@ -128,7 +127,9 @@ class App extends Component {
               <p>Your Truffle Box is installed and ready.</p>
               <h2>Smart Contract Example</h2>
               <p>If your contracts compiled and migrated successfully, below will show a stored value of 5 (by default).</p>
-              <p>Try changing the value stored on <strong>line 59</strong> of App.js.</p>
+              <p>Try changing the value stored on
+                <strong>line 59</strong>
+                of App.js.</p>
               <p>The stored value is: {this.state.storageValue}</p>
               <button>Create New Collectible</button>
               <Route path='/create' render={() => (
@@ -136,6 +137,7 @@ class App extends Component {
               )}/>
             </div>
           </div>
+          <div></div>
         </main>
       </div>
     );
