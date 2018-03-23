@@ -1,9 +1,9 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 
 class CollectibleBack extends Component {
-  constructor(props) {
-    super(props)
-  }
+  // constructor(props) {
+  //   super(props)
+  // }
 
   componentWillMount() {
 
@@ -12,9 +12,9 @@ class CollectibleBack extends Component {
   render() {
     return (
       <div className="CollectibleBack">
-        <p>{this.props.collectible.videoURL}</p>
-        <p>{this.props.collectible.title}</p>
-        <p>{this.props.collectible.description}</p>
+        <p>{this.props.videoURL}</p>
+        <p>{this.props.title}</p>
+        <p>{this.props.description}</p>
       </div>
     );
   }
