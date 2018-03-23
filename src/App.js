@@ -3,6 +3,11 @@ import SimpleStorageContract from '../build/contracts/SimpleStorage.json'
 import Collection from '../build/contracts/Collection.json'
 import Collectible from '../build/contracts/Collectible.json'
 import getWeb3 from './utils/getWeb3'
+import CreateCollectible from './CreateCollectible'
+import { Link, Route, Switch } from 'react-router-dom';
+// react-dom (what we'll use here)
+
+
 
 import './css/oswald.css'
 import './css/open-sans.css'
@@ -15,7 +20,8 @@ class App extends Component {
 
     this.state = {
       storageValue: 0,
-      web3: null
+      web3: null,
+      collectibleInstance:null
     }
   }
 
@@ -71,7 +77,7 @@ class App extends Component {
           collectionInstance: instance
         })
 
-      //   return collectionInstance._createCol("Dino", "Dinosaur collectible", 50, "https://res.cloudinary.com/dk-find-out/image/upload/q_80,w_1920,f_auto/AllosaurusLayers_vvi6q7.jpg", {from: accounts[0]})
+        // return collectionInstance._createCol("Dino", "Dinosaur collectible", 50, "https://res.cloudinary.com/dk-find-out/image/upload/q_80,w_1920,f_auto/AllosaurusLayers_vvi6q7.jpg", {from: accounts[0]})
       // }).then((result) => {
 
          return collectionInstance.Collectibles.call(accounts[0])
@@ -111,8 +117,9 @@ class App extends Component {
     return (
       <div className="App">
         <nav className="navbar pure-menu pure-menu-horizontal">
-            <a href="#" className="pure-menu-heading pure-menu-link">Truffle Box</a>
+            <a href="#" className="pure-menu-heading pure-menu-link">SUUM</a>
         </nav>
+
 
         <main className="container">
           <div className="pure-g">
@@ -124,6 +131,9 @@ class App extends Component {
               <p>Try changing the value stored on <strong>line 59</strong> of App.js.</p>
               <p>The stored value is: {this.state.storageValue}</p>
               <button>Create New Collectible</button>
+              <Route path='/create' render={() => (
+                <CreateCollectible{...this.state}/>
+              )}/>
             </div>
           </div>
         </main>
