@@ -6,6 +6,8 @@ import getWeb3 from './utils/getWeb3'
 import CreateCollectible from './CreateCollectible'
 import {Link, Route, Switch} from 'react-router-dom';
 import Profile from './Profile'
+import {Navbar, Nav, NavItem, NavBrand} from 'react-bootstrap';
+import NavBar from './Navbar';
 // react-dom (what we'll use here)
 
 import CollectibleFront from './CollectibleFront';
@@ -121,7 +123,7 @@ class App extends Component {
         return collectibleInstance.balanceOf.call(accounts[0])
       }).then((result) => {
         console.log(result.c[0]);
-        //return collectibleInstance.buyCollectible(0, {gas: this.state.web3.toWei(0.01, "nano"),value: this.state.web3.toWei(2,"ether"), from: accounts[0]})
+        //return collectibleInstance.buyCollectible(0, {gas: this.state.web3.toWei(0.0001, "nano"),value: this.state.web3.toWei(2,"ether"), from: accounts[0]})
 
       })
 
@@ -129,12 +131,20 @@ class App extends Component {
 
   }
 
+
   render() {
+
+     var navbar = {};
+      navbar.brand =
+        {linkTo: "/", text: "SUUM"};
+      navbar.links = [
+      {linkTo: "/create", text: "Create Collectible"},
+      {linkTo: "/profile", text: "My Collectibles"},
+      ];
+
     return (
       <div className="App">
-        <nav className="navbar pure-menu pure-menu-horizontal">
-          <a href="#" className="pure-menu-heading pure-menu-link">SUUM</a>
-        </nav>
+        <NavBar {...navbar} />
         <main className="container">
           <Switch>
             <Route exact path='/' render={() => (<Home collectibles={this.state.collectibles}/>)}/>
