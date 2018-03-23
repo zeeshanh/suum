@@ -42,6 +42,7 @@ class CreateCollectible extends React.Component {
       event.preventDefault();
       this.props.web3.eth.getAccounts((error, accounts) => {
       this.props.collectionInstance._createCol(this.state.Name,this.state.desc, this.state.imgLink, "", this.state.price, {from: accounts[0]});
+      window.location = '/profile'
       })
     }
   }
@@ -61,6 +62,9 @@ class CreateCollectible extends React.Component {
           Content :
           <input type="text" value={this.state.imgLink} onChange={this.handleContentChange} />
         <br/>
+          Quantity:
+          <input type="text" value="0"/>
+          <br/>
         <input type="submit" value="Create" />
       </form>
     );
