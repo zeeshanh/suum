@@ -8,6 +8,7 @@ import {Link, Route, Switch} from 'react-router-dom';
 import Profile from './Profile'
 import {Navbar, Nav, NavItem, NavBrand} from 'react-bootstrap';
 import NavBar from './Navbar';
+import SimpleNav from './SimpleNav';
 // react-dom (what we'll use here)
 
 import CollectibleFront from './CollectibleFront';
@@ -134,17 +135,28 @@ class App extends Component {
 
   render() {
 
-     var navbar = {};
-      navbar.brand =
-        {linkTo: "/", text: "SUUM"};
-      navbar.links = [
-      {linkTo: "/create", text: "Create Collectible"},
-      {linkTo: "/profile", text: "My Collectibles"},
-      ];
+    var simpleNavItems = [
+      {url: "/", text: "SUUM"},
+      {url: "/", text: "Marketplace"},
+      {url: "/create", text: "Create Collectible"},
+      {url: "/profile", text: "My Collectibles"},
+    ]
+
+     // var navbar = {};
+     //  navbar.brand =
+     //    {linkTo: "/", text: "SUUM"};
+     //  navbar.links = [
+     //  {linkTo: "/", text: "SUUM"},
+     //  {linkTo: "/create", text: "Create Collectible"},
+     //  {linkTo: "/profile", text: "My Collectibles"},
+     //  ];
 
     return (
       <div className="App">
-        <NavBar {...navbar} />
+        <SimpleNav items={simpleNavItems} />
+        {
+         //  <NavBar {...navbar} />
+        }
         <main className="container">
           <Switch>
             <Route exact path='/' render={() => (<Home collectibles={this.state.collectibles}/>)}/>

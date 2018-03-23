@@ -26,6 +26,7 @@ code {
   padding: 45px 20px;
   display: flex;
   justify-content: center;
+  margin-top: 50px;
 }
 
 .collectibles-container {
@@ -80,7 +81,35 @@ code {
   border-color: #0c1a2b;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form input {
+  margin: 10px;
+  padding: 5px 20px;
+}
+
 /* NAVBAR */
+
+.simple-navbar {
+  display: flex;
+  justify-content: space-evenly;
+  background-color: black;
+  height: 50px;
+  margin: 0;
+  list-style-type: none;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  top: 0;
+}
+
+.simple-navbar a {
+  text-decoration: none;
+  color: #FFF;
+}
 
 .navbar {
   position: fixed;

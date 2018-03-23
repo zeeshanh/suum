@@ -8,10 +8,9 @@ var NavBar = React.createClass({
         <div className="container-fluid">
           <div className="navbar-header">
             <NavBrand linkTo={this.props.brand.linkTo} text={this.props.brand.text} />
+            <li><a href={this.props.linkTo}>{this.props.text}</a></li>
           </div>
-          <div className="collapse navbar-collapse">
-            <NavMenu links={this.props.links} />
-          </div>
+
         </div>
       </nav>
     );
@@ -22,7 +21,7 @@ var NavBrand = React.createClass({
   render: function(){
     return (
       <a className="navbar-brand" href={this.props.linkTo}>{this.props.text}</a>
-    ); 
+    );
   }
 });
 
@@ -82,4 +81,3 @@ var NavLink = React.createClass({
 });
 
 export default NavBar
-

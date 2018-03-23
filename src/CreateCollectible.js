@@ -49,6 +49,8 @@ class CreateCollectible extends React.Component {
 
   render() {
     return (
+      <div>
+      <h2> Create New Collectible: </h2>
       <form onSubmit={this.handleSubmit}>
           Name:
           <input type="text" value={this.state.Name} onChange={this.handleNameChange} />
@@ -59,7 +61,7 @@ class CreateCollectible extends React.Component {
           Price:
           <input type="text" value={this.state.price} onChange={this.handlePriceChange} />
           <br/>
-          Content :
+          Image URL :
           <input type="text" value={this.state.imgLink} onChange={this.handleContentChange} />
         <br/>
           Quantity:
@@ -67,6 +69,7 @@ class CreateCollectible extends React.Component {
           <br/>
         <input type="submit" value="Create" />
       </form>
+      </div>
     );
   }
 }
