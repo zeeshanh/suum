@@ -1,5 +1,9 @@
 /* PAGE */
 
+body {
+  background-color: #ededed;
+}
+
 body,
 .pure-g [class*=pure-u] {
   font-family: 'Open Sans', sans-serif;
@@ -20,6 +24,49 @@ code {
   box-sizing: border-box;
   width: 100%;
   padding: 45px 20px;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.collectibles-container {
+  display: flex;
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.collectible-back {
+  /* flex-basis: 175px; */
+  width: 50%;
+  margin: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.collectible-front, .collectible-back img {
+  /* flex-basis: 175px; */
+  margin: 25px;
+  border-radius: 25px;
+  border-style: solid;
+  border-width: 5px;
+  border-color: black;
+}
+
+.collectible-title {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+.collectible-info {
+  font-size: 1.2em;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-evenly;
+  width: 80%;
 }
 
 .pure-button-primary {
@@ -34,7 +81,35 @@ code {
   border-color: #0c1a2b;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form input {
+  margin: 10px;
+  padding: 5px 20px;
+}
+
 /* NAVBAR */
+
+.simple-navbar {
+  display: flex;
+  justify-content: space-evenly;
+  background-color: black;
+  height: 50px;
+  margin: 0;
+  list-style-type: none;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  top: 0;
+}
+
+.simple-navbar a {
+  text-decoration: none;
+  color: #FFF;
+}
 
 .navbar {
   position: fixed;

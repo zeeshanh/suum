@@ -13,13 +13,10 @@ class Home extends Component {
 
   render() {
     return (
-      <div>
-        <div>
+      <div className="collectibles-container">
           {this.props.collectibles.length > 0 ? this.props.collectibles.map((collectibleArr, i) => {
             return <CollectibleFront key={i} image={collectibleArr[3]} collectible={collectibleArr}/>
           }) : "Loading..."}
-        </div>
-
       </div>
     );
   }

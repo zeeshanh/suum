@@ -8,6 +8,7 @@ import {Link, Route, Switch} from 'react-router-dom';
 import Profile from './Profile'
 import {Navbar, Nav, NavItem, NavBrand} from 'react-bootstrap';
 import NavBar from './Navbar';
+import SimpleNav from './SimpleNav';
 // react-dom (what we'll use here)
 
 import CollectibleFront from './CollectibleFront';
@@ -82,7 +83,7 @@ class App extends Component {
         collectionInstance = instance
         this.setState({collectionInstance: instance})
 
-        //collectionInstance._createCol("Innerbloom", "Innerbloom by Rufus du Sol", "https://images.genius.com/a7476d42435ba6e34c7015fcb635cca6.1000x1000x1.jpg", "https://www.youtube.com/watch?v=IA1liCmUsAM", 1, {from:accounts[0]})
+        // collectionInstance._createCol("Innerbloom", "Innerbloom by Rufus du Sol", "https://www.allthingsgomusic.com/wp-content/uploads/2015/11/rufus-du-sol-innerbloom-e1447974459586.jpg", "https://www.youtube.com/embed/IA1liCmUsAM", 1, {from:accounts[0]})
 
         return collectionInstance.collectibleToOwner.call(0)
       }).then((result) => {
@@ -108,7 +109,7 @@ class App extends Component {
       }).then(values => {
         console.log("vals...", values)
         this.setState({collectibles: values})
-        
+
         var mine= values.filter(function(col){
           return col[6] == accounts[0];
         });
@@ -134,18 +135,29 @@ class App extends Component {
 
   render() {
 
-     var navbar = {};
-      navbar.brand = 
-        {linkTo: "/", text: "SUUM"};
-      navbar.links = [
-      {linkTo: "/create", text: "Create Collectible"},
-      {linkTo: "/profile", text: "My Collectibles"},
-      ];
+    var simpleNavItems = [
+      {url: "/", text: "SUUM"},
+      {url: "/", text: "Marketplace"},
+      {url: "/create", text: "Create Collectible"},
+      {url: "/profile", text: "My Collectibles"},
+    ]
+
+     // var navbar = {};
+     //  navbar.brand =
+     //    {linkTo: "/", text: "SUUM"};
+     //  navbar.links = [
+     //  {linkTo: "/", text: "SUUM"},
+     //  {linkTo: "/create", text: "Create Collectible"},
+     //  {linkTo: "/profile", text: "My Collectibles"},
+     //  ];
 
     return (
 
       <div className="App">
-        <NavBar {...navbar} />
+        <SimpleNav items={simpleNavItems} />
+        {
+         //  <NavBar {...navbar} />
+        }
         <main className="container">
           <div id = "popupContainer"></div>
           <Switch>
