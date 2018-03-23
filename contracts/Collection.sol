@@ -31,15 +31,11 @@ contract Collection{
       ownerCollectibleCount[msg.sender]++;
     }
 
-    function getCol() public view returns (uint) {
-    	return state;
-    }
-
-		function getCollectiblesLength() returns(uint) public {
+		function getCollectiblesLength() public view returns(uint length){
 			return collectibles.length;
 		}
 
-		function getCollectibleByIndex(uint _collectibleIndex) public view returns (string, string, string, string, uint) public {
+		function getCollectibleByIndex(uint _collectibleIndex) public view returns (string, string, string, string, uint){
 			return (collectibles[_collectibleIndex].name, collectibles[_collectibleIndex].desc, collectibles[_collectibleIndex].collectibleImage, collectibles[_collectibleIndex].collectibleExtraContent, collectibles[_collectibleIndex].price);
 		}
 
