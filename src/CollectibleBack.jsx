@@ -16,6 +16,11 @@ class CollectibleBack extends Component {
         <p>{this.props.location.state.collectible[4]}</p>
         <p>{this.props.location.state.collectible[1]}</p>
         <p>{this.props.location.state.collectible[2]}</p>
+        <p>{this.props.location.state.collectible[5].toString()}</p>
+        <p>{this.props.location.state.collectible[0].toString()}</p>
+        <p>{this.props.location.state.collectible[6]}</p>
+
+
       </div>
     );
   }

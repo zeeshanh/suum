@@ -5,6 +5,7 @@ import Collectible from '../build/contracts/Collectible.json'
 import getWeb3 from './utils/getWeb3'
 import CreateCollectible from './CreateCollectible'
 import {Link, Route, Switch} from 'react-router-dom';
+import Profile from './Profile'
 // react-dom (what we'll use here)
 
 import CollectibleFront from './CollectibleFront';
@@ -24,7 +25,10 @@ class App extends Component {
       collectibles: [],
       storageValue: 0,
       web3: null,
-      collectionInstance:null
+      collectionInstance:null,
+      colToOwner:null,
+      myCollectibles:[],
+      account:""
     }
   }
 
@@ -69,17 +73,20 @@ class App extends Component {
 
     // // Get accounts.
     this.state.web3.eth.getAccounts((error, accounts) => {
-
+      this.setState({account:accounts[0]})
+      console.log(accounts);
       collection.deployed().then((instance) => {
         console.log("DEPOLYED")
         collectionInstance = instance
         this.setState({collectionInstance: instance})
 
-        //collectionInstance._createCol("Innerbloom", "Innerbloom by Rufus du Sol", "https://images.genius.com/a7476d42435ba6e34c7015fcb635cca6.1000x1000x1.jpg", "https://www.youtube.com/watch?v=IA1liCmUsAM", 10, {from:accounts[0]})
+        collectionInstance._createCol("Innerbloom", "Innerbloom by Rufus du Sol", "https://images.genius.com/a7476d42435ba6e34c7015fcb635cca6.1000x1000x1.jpg", "https://www.youtube.com/watch?v=IA1liCmUsAM", 1, {from:accounts[0]})
 
-
+        return collectionInstance.collectibleToOwner.call(0)
+      }).then((result) => {
+        console.log(result);
         // collectionInstance._createCol("Busy Earnin", "Busy Earnin by Jungle", "https://images.genius.com/e64c86234196aea00f6fe89923861476.1000x1000x1.jpg", "https://www.youtube.com/watch?v=BcsfftwLUf0", 10, {from: accounts[0]})
-        // return collectionInstance._createCol("Innerbloom", "Innerbloom by Rufus du Sol", "https://images.genius.com/a7476d42435ba6e34c7015fcb635cca6.1000x1000x1.jpg", "https://www.youtube.com/watch?v=IA1liCmUsAM", 10, {from: accounts[0]})
+         //return collectionInstance._createCol("Innerbloom", "Innerbloom by Rufus du Sol", "https://images.genius.com/a7476d42435ba6e34c7015fcb635cca6.1000x1000x1.jpg", "https://www.youtube.com/watch?v=IA1liCmUsAM", 10, {from: accounts[0]})
 
         // return collectionInstance.Collectibles.call(accounts[0])
       //}).then((result) => {
@@ -99,14 +106,23 @@ class App extends Component {
       }).then(values => {
         console.log("vals...", values)
         this.setState({collectibles: values})
+        
+        var mine= values.filter(function(col){
+          return col[6] == accounts[0];
+        });
+
+        console.log(mine);
+        this.setState({myCollectibles: mine})
+
       })
 
       collectible.deployed().then((instance) => {
         collectibleInstance = instance
         return collectibleInstance.balanceOf.call(accounts[0])
       }).then((result) => {
-
         console.log(result.c[0]);
+        //return collectibleInstance.buyCollectible(0, {gas: this.state.web3.toWei(0.01, "nano"),value: this.state.web3.toWei(2,"ether"), from: accounts[0]})
+
       })
 
     })
@@ -124,6 +140,7 @@ class App extends Component {
             <Route exact path='/' render={() => (<Home collectibles={this.state.collectibles}/>)}/>
             <Route path='/create' render={() => (<CreateCollectible{...this.state}/>)}/>
             <Route path='/collectible' component={CollectibleBack}/>
+            <Route path = '/profile' render ={() => (<Profile collectibles={this.state.myCollectibles} address = {this.state.account}/>)}/>
           </Switch>
         </main>
       </div>

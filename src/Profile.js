@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import CollectibleFront from './CollectibleFront';
 import CollectibleBack from './CollectibleBack';
 
-class Home extends Component {
+class Profile extends Component {
   // constructor(props) {
   //   super(props)
   // }
@@ -14,6 +14,7 @@ class Home extends Component {
   render() {
     return (
       <div>
+      <p>My address: {this.props.address}</p>
         <div>
           {this.props.collectibles.length > 0 ? this.props.collectibles.map((collectibleArr, i) => {
             return <CollectibleFront key={i} image={collectibleArr[3]} collectible={collectibleArr}/>
@@ -25,4 +26,4 @@ class Home extends Component {
   }
 }
 
-export default Home
+export default Profile

@@ -23,24 +23,25 @@ contract Collection{
 
 	mapping (uint => address) public creators;
 	mapping (uint => Collectible) public Collectibles;
-  mapping (uint => address) public collectibleToOwner;
-  mapping (address => uint) ownerCollectibleCount;
+    mapping (uint => address) public collectibleToOwner;
+    mapping (address => uint) ownerCollectibleCount;
 
-  function _createCol(string name, string desc, string collectibleImage, string collectibleExtraContent, uint price) public {
-		uint _id = idCounter;
-  	collectibles.push(Collectible(_id, name, desc, collectibleImage, collectibleExtraContent, price));
-		idCounter++;
-		creators[_id] = msg.sender;
-  	collectibleToOwner[_id] = msg.sender;
+    function _createCol(string name, string desc, string collectibleImage, string collectibleExtraContent, uint price) public {
+	uint _id = idCounter;
+    collectibles.push(Collectible(_id, name, desc, collectibleImage, collectibleExtraContent, price));
+	creators[_id] = msg.sender;
+    collectibleToOwner[_id] = msg.sender;
     ownerCollectibleCount[msg.sender]++;
+    idCounter++;
   }
 
 	function getCollectiblesLength() public view returns(uint length){
 		return collectibles.length;
 	}
 
-	function getCollectibleByIndex(uint _collectibleIndex) public view returns (uint, string name, string, string, string, uint){
-		return (collectibles[_collectibleIndex].id, collectibles[_collectibleIndex].name, collectibles[_collectibleIndex].desc, collectibles[_collectibleIndex].collectibleImage, collectibles[_collectibleIndex].collectibleExtraContent, collectibles[_collectibleIndex].price);
+	function getCollectibleByIndex(uint _collectibleIndex) public view returns (uint, string name, string, string, string, uint, address){
+        uint _id = collectibles[_collectibleIndex].id;
+		return (collectibles[_collectibleIndex].id, collectibles[_collectibleIndex].name, collectibles[_collectibleIndex].desc, collectibles[_collectibleIndex].collectibleImage, collectibles[_collectibleIndex].collectibleExtraContent, collectibles[_collectibleIndex].price, collectibleToOwner[_id]);
 	}
 
 }

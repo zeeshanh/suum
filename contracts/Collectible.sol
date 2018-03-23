@@ -41,4 +41,12 @@ contract Collectible is Collection, ERC721 {
     address owner = ownerOf(_tokenId);
     _transfer(owner, msg.sender, _tokenId);
   }
+
+  function buyCollectible(uint _tokenId) public payable{
+
+    address oldOwner = collectibleToOwner[_tokenId];
+    _transfer(oldOwner, msg.sender, _tokenId);
+
+  }
+
 }
