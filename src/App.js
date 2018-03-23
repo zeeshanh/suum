@@ -3,9 +3,15 @@ import SimpleStorageContract from '../build/contracts/SimpleStorage.json'
 import Collection from '../build/contracts/Collection.json'
 import Collectible from '../build/contracts/Collectible.json'
 import getWeb3 from './utils/getWeb3'
+import CreateCollectible from './CreateCollectible'
+import { Link, Route, Switch } from 'react-router-dom';
+// react-dom (what we'll use here)
+
+
 
 import CollectibleFront from './CollectibleFront';
 import CollectibleBack from './CollectibleBack';
+import Home from './Home';
 
 import './css/oswald.css'
 import './css/open-sans.css'
@@ -19,7 +25,8 @@ class App extends Component {
     this.state = {
       collectibles: [],
       storageValue: 0,
-      web3: null
+      web3: null,
+      collectibleInstance:null
     }
   }
 
@@ -131,18 +138,16 @@ class App extends Component {
     return (
       <div className="App">
         <nav className="navbar pure-menu pure-menu-horizontal">
-          <a href="#" className="pure-menu-heading pure-menu-link">Truffle Box</a>
+            <a href="#" className="pure-menu-heading pure-menu-link">SUUM</a>
         </nav>
 
+
         <main className="container">
-          <div>
-            {this.state.collectibles.length > 0 ? this.state.collectibles.map((collectibleArr, i) => {
-              return <CollectibleFront key={i} image={collectibleArr[2]} />
-            }) : "Loading..."}
-          </div>
-          <div>
-            {this.state.collectibles.length > 0 ? <CollectibleBack videoURL={this.state.collectibles[0][3]} title={this.state.collectibles[0][0]} description={this.state.collectibles[0][1]} />: "Loading..."}
-          </div>
+          <Switch>
+            <Route exact path='/' render={() => (<Home collectibles={this.state.collectibles} />)}/>
+            <Route path='/create' render={() => (<CreateCollectible{...this.state}/>)} />
+          </Switch>
+
         </main>
       </div>
     );
