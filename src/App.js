@@ -140,6 +140,9 @@ class App extends Component {
               return <CollectibleFront key={i} image={collectibleArr[2]} />
             }) : "Loading..."}
           </div>
+          <div>
+            {this.state.collectibles.length > 0 ? <CollectibleBack videoURL={this.state.collectibles[0][3]} title={this.state.collectibles[0][0]} description={this.state.collectibles[0][1]} />: "Loading..."}
+          </div>
         </main>
       </div>
     );
