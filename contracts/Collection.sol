@@ -25,7 +25,7 @@ contract Collection{
     mapping (address => uint) ownerCollectibleCount;
 
     function _createCol(string name, string desc, string collectibleImage, string collectibleExtraContent, uint price) public {
-    	uint id = collectibles.push(Collectible(name, desc, collectibleImage, price));
+    	uint id = collectibles.push(Collectible(name, desc, collectibleImage, collectibleExtraContent, price));
 			creators[id] = msg.sender;
     	collectibleToOwner[id] = msg.sender;
       ownerCollectibleCount[msg.sender]++;
@@ -35,11 +35,11 @@ contract Collection{
     	return state;
     }
 
-		function getCollectiblesLength() returns(uint) {
+		function getCollectiblesLength() returns(uint) public {
 			return collectibles.length;
 		}
 
-		function getCollectibleByIndex(uint _collectibleIndex) public view returns (string, string, string, string, uint) {
+		function getCollectibleByIndex(uint _collectibleIndex) public view returns (string, string, string, string, uint) public {
 			return (collectibles[_collectibleIndex].name, collectibles[_collectibleIndex].desc, collectibles[_collectibleIndex].collectibleImage, collectibles[_collectibleIndex].collectibleExtraContent, collectibles[_collectibleIndex].price);
 		}
 
