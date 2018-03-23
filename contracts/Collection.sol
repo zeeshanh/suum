@@ -12,6 +12,7 @@ contract Collection{
 		// this can be a link to a video, song, etc.
 		string collectibleExtraContent;
 		uint price;
+        uint quantity;
 	}
 
 	modifier onlyOwnerOf(uint _collectibleId) {
@@ -26,9 +27,9 @@ contract Collection{
     mapping (uint => address) public collectibleToOwner;
     mapping (address => uint) ownerCollectibleCount;
 
-    function _createCol(string name, string desc, string collectibleImage, string collectibleExtraContent, uint price) public {
+    function _createCol(string name, string desc, string collectibleImage, string collectibleExtraContent, uint price, uint quantity) public {
 	uint _id = idCounter;
-    collectibles.push(Collectible(_id, name, desc, collectibleImage, collectibleExtraContent, price));
+    collectibles.push(Collectible(_id, name, desc, collectibleImage, collectibleExtraContent, price, quantity));
 	creators[_id] = msg.sender;
     collectibleToOwner[_id] = msg.sender;
     ownerCollectibleCount[msg.sender]++;
