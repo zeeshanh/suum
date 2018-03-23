@@ -80,7 +80,7 @@ class App extends Component {
         collectionInstance = instance
         this.setState({collectionInstance: instance})
 
-        collectionInstance._createCol("Innerbloom", "Innerbloom by Rufus du Sol", "https://images.genius.com/a7476d42435ba6e34c7015fcb635cca6.1000x1000x1.jpg", "https://www.youtube.com/watch?v=IA1liCmUsAM", 1, {from:accounts[0]})
+        // collectionInstance._createCol("Innerbloom", "Innerbloom by Rufus du Sol", "https://www.allthingsgomusic.com/wp-content/uploads/2015/11/rufus-du-sol-innerbloom-e1447974459586.jpg", "https://www.youtube.com/embed/IA1liCmUsAM", 1, {from:accounts[0]})
 
         return collectionInstance.collectibleToOwner.call(0)
       }).then((result) => {
@@ -106,7 +106,7 @@ class App extends Component {
       }).then(values => {
         console.log("vals...", values)
         this.setState({collectibles: values})
-        
+
         var mine= values.filter(function(col){
           return col[6] == accounts[0];
         });
