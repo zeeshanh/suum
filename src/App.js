@@ -4,10 +4,8 @@ import Collection from '../build/contracts/Collection.json'
 import Collectible from '../build/contracts/Collectible.json'
 import getWeb3 from './utils/getWeb3'
 import CreateCollectible from './CreateCollectible'
-import { Link, Route, Switch } from 'react-router-dom';
+import {Link, Route, Switch} from 'react-router-dom';
 // react-dom (what we'll use here)
-
-
 
 import CollectibleFront from './CollectibleFront';
 import CollectibleBack from './CollectibleBack';
@@ -26,7 +24,7 @@ class App extends Component {
       collectibles: [],
       storageValue: 0,
       web3: null,
-      collectibleInstance:null
+      collectionInstance: null
     }
   }
 
@@ -37,7 +35,6 @@ class App extends Component {
     getWeb3.then(results => {
       console.log('WEB3', results.web3)
       this.setState({web3: results.web3})
-
 
       // Instantiate contract once web3 provided.
       this.instantiateContract()
@@ -73,61 +70,36 @@ class App extends Component {
     // // Get accounts.
     this.state.web3.eth.getAccounts((error, accounts) => {
 
-
-      collection.deployed()
-      .then((instance) => {
+      collection.deployed().then((instance) => {
         console.log("DEPOLYED")
         collectionInstance = instance
 
-        // this.setState({collectionInstance: instance})
-        // collectionInstance._createCol("Busy Earnin", "Busy Earnin by Jungle", "https://images.genius.com/e64c86234196aea00f6fe89923861476.1000x1000x1.jpg", "https://www.youtube.com/watch?v=BcsfftwLUf0", 10, {from: accounts[0]})
-        // return collectionInstance._createCol("Innerbloom", "Innerbloom by Rufus du Sol", "https://images.genius.com/a7476d42435ba6e34c7015fcb635cca6.1000x1000x1.jpg", "https://www.youtube.com/watch?v=IA1liCmUsAM", 10, {from: accounts[0]})
+        this.setState({collectionInstance: instance})
+        // return collectionInstance._createCol("Test", "Busy Earnin by Jungle", "https://images.genius.com/a7476d42435ba6e34c7015fcb635cca6.1000x1000x1.jpg", "https://www.youtube.com/watch?v=BcsfftwLUf0", 10, {from: accounts[0]})
 
-        // return collectionInstance.Collectibles.call(accounts[0])
       }).then((result) => {
-        console.log('TEST')
         return collectionInstance.getCollectiblesLength()
       }).then((result) => {
+        console.log('Huh..')
         var lengthOfCollectibles = result.c[0];
-
-        for(var i = 0; i < lengthOfCollectibles; i++) {
+        for (var i = 0; i < lengthOfCollectibles; i++) {
           var localPromise = collectionInstance.getCollectibleByIndex(i)
           collectiblePromises.push(localPromise);
         }
-        console.log("Length of Collectibles:", lengthOfCollectibles)
         return collectionInstance.getCollectibleByIndex(0);
-      })
-      .then(result => {
+      }).then(result => {
         localCollectibles.push(result)
-        console.log("Local Collectibles:", localCollectibles)
-        console.log('Collect?', result)
         return Promise.all(collectiblePromises)
-      })
-      .then(values => {
-        console.log("PROMISE VALUES", values)
+      }).then(values => {
+        console.log("vals...", values)
         this.setState({collectibles: values})
       })
 
       collectible.deployed().then((instance) => {
         collectibleInstance = instance
-
         return collectibleInstance.balanceOf.call(accounts[0])
       }).then((result) => {
         // console.log(result);
-      })
-
-      simpleStorage.deployed().then((instance) => {
-        simpleStorageInstance = instance
-
-        // Stores a given value, 5 by default.
-        //   return simpleStorageInstance.set(50, {from: accounts[0]})
-        // }).then((result) => {
-        // Get the value from the contract to prove it worked.
-        return simpleStorageInstance.get.call(accounts[0])
-      }).then((result) => {
-        // console.log(result);
-        // Update state with the result.
-        return this.setState({storageValue: result.c[0]})
       })
 
     })
@@ -138,16 +110,14 @@ class App extends Component {
     return (
       <div className="App">
         <nav className="navbar pure-menu pure-menu-horizontal">
-            <a href="#" className="pure-menu-heading pure-menu-link">SUUM</a>
+          <a href="#" className="pure-menu-heading pure-menu-link">SUUM</a>
         </nav>
-
-
         <main className="container">
           <Switch>
-            <Route exact path='/' render={() => (<Home collectibles={this.state.collectibles} />)}/>
-            <Route path='/create' render={() => (<CreateCollectible{...this.state}/>)} />
+            <Route exact path='/' render={() => (<Home collectibles={this.state.collectibles}/>)}/>
+            <Route path='/create' render={() => (<CreateCollectible{...this.state}/>)}/>
+            <Route path='/collectible' component={CollectibleBack}/>
           </Switch>
-
         </main>
       </div>
     );

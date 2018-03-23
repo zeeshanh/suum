@@ -12,9 +12,10 @@ class CollectibleBack extends Component {
   render() {
     return (
       <div className="CollectibleBack">
-        <p>{this.props.videoURL}</p>
-        <p>{this.props.title}</p>
-        <p>{this.props.description}</p>
+        <img src={this.props.location.state.collectible[3]} height="375" width="275" alt="Missing..."></img>
+        <p>{this.props.location.state.collectible[4]}</p>
+        <p>{this.props.location.state.collectible[1]}</p>
+        <p>{this.props.location.state.collectible[2]}</p>
       </div>
     );
   }

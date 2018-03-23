@@ -2,7 +2,10 @@ pragma solidity ^0.4.18;
 
 contract Collection{
 
+	uint idCounter = 0;
+
 	struct Collectible{
+		uint id;
 		string name;
 		string desc;
 		string collectibleImage;
@@ -24,9 +27,11 @@ contract Collection{
   mapping (address => uint) ownerCollectibleCount;
 
   function _createCol(string name, string desc, string collectibleImage, string collectibleExtraContent, uint price) public {
-  	uint id = collectibles.push(Collectible(name, desc, collectibleImage, collectibleExtraContent, price));
-		creators[id] = msg.sender;
-  	collectibleToOwner[id] = msg.sender;
+		uint _id = idCounter;
+  	collectibles.push(Collectible(_id, name, desc, collectibleImage, collectibleExtraContent, price));
+		idCounter++;
+		creators[_id] = msg.sender;
+  	collectibleToOwner[_id] = msg.sender;
     ownerCollectibleCount[msg.sender]++;
   }
 
@@ -34,8 +39,8 @@ contract Collection{
 		return collectibles.length;
 	}
 
-	function getCollectibleByIndex(uint _collectibleIndex) public view returns (string name, string, string, string, uint){
-		return (collectibles[_collectibleIndex].name, collectibles[_collectibleIndex].desc, collectibles[_collectibleIndex].collectibleImage, collectibles[_collectibleIndex].collectibleExtraContent, collectibles[_collectibleIndex].price);
+	function getCollectibleByIndex(uint _collectibleIndex) public view returns (uint, string name, string, string, string, uint){
+		return (collectibles[_collectibleIndex].id, collectibles[_collectibleIndex].name, collectibles[_collectibleIndex].desc, collectibles[_collectibleIndex].collectibleImage, collectibles[_collectibleIndex].collectibleExtraContent, collectibles[_collectibleIndex].price);
 	}
 
 }
