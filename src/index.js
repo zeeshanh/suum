@@ -4,6 +4,7 @@ import App from './App'
 import { BrowserRouter } from 'react-router-dom'
 import CreateCollectible from './CreateCollectible'
 // set data
+import Popup from 'react-popup';
 
 
 ReactDOM.render((
@@ -11,3 +12,8 @@ ReactDOM.render((
     <App/>
   </BrowserRouter>
 ), document.getElementById('root'))
+
+ReactDOM.render(
+    <Popup />,
+    document.getElementById('popupContainer')
+);

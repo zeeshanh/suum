@@ -1,11 +1,25 @@
 import React, {Component} from 'react';
+import Popup from 'react-popup';
 
 class CollectibleBack extends Component {
-  // constructor(props) {
-  //   super(props)
+   //constructor(props) {
+    // super(props)
   // }
 
   componentWillMount() {
+
+  }
+
+  giftCollectible(event){
+      console.log("clicked");
+      Popup.alert('I am alert, nice to meet you');
+  }
+
+  sellCollectible(event){
+
+  }
+
+  buyCollectible(event){
 
   }
 
@@ -20,8 +34,27 @@ class CollectibleBack extends Component {
         <p>{this.props.location.state.collectible[0].toString()}</p>
         <p>{this.props.location.state.collectible[6]}</p>
 
+        <div className="gift">
+        <button onClick={this.giftCollectible.bind(this)}>
+          Gift
+        </button>
+        </div>
+
+        <div className="buy">
+        <button onClick={this.buyCollectible.bind(this)}>
+          Buy
+        </button>
+        </div>
+
+        <div className="sell">
+        <button onClick={this.sellCollectible.bind(this)}>
+          Sell
+        </button>
+        </div>
 
       </div>
+
+      
     );
   }
 }

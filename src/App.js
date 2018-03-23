@@ -143,9 +143,11 @@ class App extends Component {
       ];
 
     return (
+
       <div className="App">
         <NavBar {...navbar} />
         <main className="container">
+          <div id = "popupContainer"></div>
           <Switch>
             <Route exact path='/' render={() => (<Home collectibles={this.state.collectibles}/>)}/>
             <Route path='/create' render={() => (<CreateCollectible{...this.state}/>)}/>
