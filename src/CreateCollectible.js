@@ -7,14 +7,22 @@ class CreateCollectible extends React.Component {
     this.state = {Name: '',
                   desc:'',
                   price: 0,
-                  imgLink: ''};
+                  imgLink: '',
+                  quantity:0,
+                  creator: ''};
 
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleDescChange = this.handleDescChange.bind(this);
     this.handlePriceChange = this.handlePriceChange.bind(this);
     this.handleContentChange = this.handleContentChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleQuantityChange = this.handleQuantityChange.bind(this);
+    this.handleCreatorChange = this.handleCreatorChange.bind(this);
 
+  }
+
+  handleQuantityChange(event){
+    this.setState({quantity:event.target.value});
   }
 
   handleNameChange(event) {
@@ -33,15 +41,17 @@ class CreateCollectible extends React.Component {
     this.setState({imgLink: event.target.value});
   }
 
+  handleCreatorChange(event){
+    this.setState({creator: event.target.value})
+  }
+
   handleSubmit(event) {
-    if (this.state.Name == "" || this.state.desc == "" || this.state.price == "" || this.state.imgLink ==""|| isNaN(this.state.price)){
+    if (this.state.creator === "" || this.state.Name === "" || this.state.desc === "" || this.state.price === "" || this.state.imgLink === ""|| isNaN(this.state.price) || isNaN(this.state.quantity)){
           alert("Invalid input format");
         }
-    //alert('A name was submitted: ' + this.state.value);
     else{
-      event.preventDefault();
       this.props.web3.eth.getAccounts((error, accounts) => {
-      this.props.collectionInstance._createCol(this.state.Name,this.state.desc, this.state.imgLink, "", this.state.price, {from: accounts[0]});
+      this.props.collectionInstance._createCol(this.state.Name,this.state.desc, this.state.imgLink, "", this.state.price, this.state.quantity, this.state.creator,{from: accounts[0]});
       window.location = '/profile'
       })
     }
@@ -52,6 +62,9 @@ class CreateCollectible extends React.Component {
       <div>
       <h2> Create New Collectible: </h2>
       <form onSubmit={this.handleSubmit}>
+          Creator:
+          <input type="text" value={this.state.Creator} onChange={this.handleCreatorChange} />
+          <br/>
           Name:
           <input type="text" value={this.state.Name} onChange={this.handleNameChange} />
           <br/>
@@ -65,7 +78,7 @@ class CreateCollectible extends React.Component {
           <input type="text" value={this.state.imgLink} onChange={this.handleContentChange} />
         <br/>
           Quantity:
-          <input type="text" value="0"/>
+          <input type="text" value={this.state.quantity} onChange={this.handleQuantityChange}/>
           <br/>
         <input type="submit" value="Create" />
       </form>

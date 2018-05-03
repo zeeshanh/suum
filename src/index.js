@@ -12,8 +12,3 @@ ReactDOM.render((
     <App/>
   </BrowserRouter>
 ), document.getElementById('root'))
-
-ReactDOM.render(
-    <Popup />,
-    document.getElementById('popupContainer')
-);

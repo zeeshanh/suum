@@ -22,9 +22,9 @@ contract Collectible is Collection, ERC721 {
   function _transfer(address _from, address _to, uint256 _tokenId) private {
     ownerCollectibleCount[_to] = ownerCollectibleCount[_to].add(1);
     // test this line (typo in source code)
-    ownerCollectibleCount[msg.sender] = ownerCollectibleCount[msg.sender].sub(1);
+    ownerCollectibleCount[_from] = ownerCollectibleCount[msg.sender].sub(1);
     collectibleToOwner[_tokenId] = _to;
-    Transfer(_from, _to, _tokenId);
+    emit Transfer(_from, _to, _tokenId);
   }
 
   function transfer(address _to, uint256 _tokenId) public onlyOwnerOf(_tokenId) {
@@ -33,7 +33,7 @@ contract Collectible is Collection, ERC721 {
 
   function approve(address _to, uint256 _tokenId) public onlyOwnerOf(_tokenId) {
     collectibleApproval[_tokenId] = _to;
-    Approval(msg.sender, _to, _tokenId);
+    emit Approval(msg.sender, _to, _tokenId);
   }
 
   function takeOwnership(uint256 _tokenId) public {
@@ -42,11 +42,26 @@ contract Collectible is Collection, ERC721 {
     _transfer(owner, msg.sender, _tokenId);
   }
 
-  function buyCollectible(uint _tokenId) public payable{
-
-    address oldOwner = collectibleToOwner[_tokenId];
+  function buyCollectible(uint256 _tokenId) public payable returns (bool){
+    require(msg.value >= collectibles[_tokenId].price);
+    address oldOwner = ownerOf(_tokenId);
     _transfer(oldOwner, msg.sender, _tokenId);
+    oldOwner.transfer(msg.value/10*8);
+    creators[_tokenId].transfer(msg.value/10);
+    return true;
 
   }
+  
+  function setPrice(uint256 _tokenId, uint price) public onlyOwnerOf(_tokenId) {
+      collectibles[_tokenId].price = price; 
+  }
+ 
+ function gift(uint256 _tokenId, address _to) public onlyOwnerOf(_tokenId){
+     _transfer(msg.sender, _to, _tokenId);
+ }
+
+ function destroy(uint256 _tokenId) public onlyOwnerOf(_tokenId){
+    delete collectibles[_tokenId];
+ }
 
 }

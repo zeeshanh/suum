@@ -83,17 +83,17 @@ class App extends Component {
         collectionInstance = instance
         this.setState({collectionInstance: instance})
 
-        // collectionInstance._createCol("Innerbloom", "Innerbloom by Rufus du Sol", "https://www.allthingsgomusic.com/wp-content/uploads/2015/11/rufus-du-sol-innerbloom-e1447974459586.jpg", "https://www.youtube.com/embed/IA1liCmUsAM", 1, {from:accounts[0]})
+        //collectionInstance._createCol("Innerbloom", "Innerbloom by Rufus du Sol", "https://www.allthingsgomusic.com/wp-content/uploads/2015/11/rufus-du-sol-innerbloom-e1447974459586.jpg", "https://www.youtube.com/embed/IA1liCmUsAM", 1, {from:accounts[0]})
 
         return collectionInstance.collectibleToOwner.call(0)
       }).then((result) => {
         console.log(result);
-        // collectionInstance._createCol("Busy Earnin", "Busy Earnin by Jungle", "https://images.genius.com/e64c86234196aea00f6fe89923861476.1000x1000x1.jpg", "https://www.youtube.com/watch?v=BcsfftwLUf0", 10, {from: accounts[0]})
+        return collectionInstance._createCol("Busy Earnin", "Busy Earnin by Jungle", "https://images.genius.com/e64c86234196aea00f6fe89923861476.1000x1000x1.jpg", "https://www.youtube.com/watch?v=BcsfftwLUf0", 10, 50, "Zeeshan",{from: accounts[0]})
          //return collectionInstance._createCol("Innerbloom", "Innerbloom by Rufus du Sol", "https://images.genius.com/a7476d42435ba6e34c7015fcb635cca6.1000x1000x1.jpg", "https://www.youtube.com/watch?v=IA1liCmUsAM", 10, {from: accounts[0]})
-
-        // return collectionInstance.Collectibles.call(accounts[0])
-      //}).then((result) => {
-       // console.log('TEST')
+       }).then((result) =>{
+         return collectionInstance.collectibles.call(0)
+      }).then((result) => {
+        console.log('TEST')
         return collectionInstance.getCollectiblesLength()
       }).then((result) => {
         console.log('Huh..')
@@ -119,14 +119,14 @@ class App extends Component {
 
       })
 
-      collectible.deployed().then((instance) => {
-        collectibleInstance = instance
-        return collectibleInstance.balanceOf.call(accounts[0])
-      }).then((result) => {
-        console.log(result.c[0]);
-        //return collectibleInstance.buyCollectible(0, {gas: this.state.web3.toWei(0.0001, "nano"),value: this.state.web3.toWei(2,"ether"), from: accounts[0]})
+      // collectible.deployed().then((instance) => {
+      //   collectibleInstance = instance
+      //   return collectibleInstance.buyCollectible(0, {value: this.state.web3.toWei(1,"ether"), from: accounts[0]})
+      //   .then((result) => {
+      //     console.log(result);
+        //})
 
-      })
+     // })
 
     })
 

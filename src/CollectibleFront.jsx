@@ -18,11 +18,15 @@ class CollectibleFront extends Component {
       </Link>
       <div className = "collectible-details">
         <div className = "collectible-Name">
-        {this.props.collectible[1]}
+        Name: {this.props.collectible[1]}
         </div>
 
         <div className = "collectible_price">
-          {this.props.collectible[5].toString()}
+          Price: {this.props.collectible[5].toString()}
+          </div>
+
+        <div className = "collectible_quantity">
+          Quantity: {this.props.collectible[7].toString()}
           </div>
       </div>
       </div>
