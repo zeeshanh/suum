@@ -29,6 +29,7 @@ class App extends Component {
       storageValue: 0,
       web3: null,
       collectionInstance:null,
+      collectibleInstance:null,
       colToOwner:null,
       myCollectibles:[],
       account:""
@@ -59,16 +60,13 @@ class App extends Component {
      */
 
     const contract = require('truffle-contract')
-    const simpleStorage = contract(SimpleStorageContract)
     const collection = contract(Collection)
     const collectible = contract(Collectible)
 
-    simpleStorage.setProvider(this.state.web3.currentProvider)
     collection.setProvider(this.state.web3.currentProvider)
     collectible.setProvider(this.state.web3.currentProvider)
 
     // Declaring this for later so we can chain functions on SimpleStorage.
-    var simpleStorageInstance
     var collectionInstance
     var collectibleInstance
     var localCollectibles = [];
@@ -88,9 +86,9 @@ class App extends Component {
         return collectionInstance.collectibleToOwner.call(0)
       }).then((result) => {
         console.log(result);
-        return collectionInstance._createCol("Busy Earnin", "Busy Earnin by Jungle", "https://images.genius.com/e64c86234196aea00f6fe89923861476.1000x1000x1.jpg", "https://www.youtube.com/watch?v=BcsfftwLUf0", 10, 50, "Zeeshan",{from: accounts[0]})
+        //return collectionInstance._createCol("Busy Earnin", "Busy Earnin by Jungle", "https://images.genius.com/e64c86234196aea00f6fe89923861476.1000x1000x1.jpg", "https://www.youtube.com/watch?v=BcsfftwLUf0", 10, 50, "Zeeshan",{from: accounts[0]})
          //return collectionInstance._createCol("Innerbloom", "Innerbloom by Rufus du Sol", "https://images.genius.com/a7476d42435ba6e34c7015fcb635cca6.1000x1000x1.jpg", "https://www.youtube.com/watch?v=IA1liCmUsAM", 10, {from: accounts[0]})
-       }).then((result) =>{
+       //}).then((result) =>{
          return collectionInstance.collectibles.call(0)
       }).then((result) => {
         console.log('TEST')
@@ -119,12 +117,11 @@ class App extends Component {
 
       })
 
-      // collectible.deployed().then((instance) => {
-      //   collectibleInstance = instance
-      //   return collectibleInstance.buyCollectible(0, {value: this.state.web3.toWei(1,"ether"), from: accounts[0]})
-      //   .then((result) => {
-      //     console.log(result);
-        //})
+      collectible.deployed().then((instance) => {
+        collectibleInstance = instance
+         this.setState({collectibleInstance: instance})
+        
+        })
 
      // })
 
@@ -161,7 +158,7 @@ class App extends Component {
         <main className="container">
           <div id = "popupContainer"></div>
           <Switch>
-            <Route exact path='/' render={() => (<Home collectibles={this.state.collectibles}/>)}/>
+            <Route exact path='/' render={() => (<Home collectibles={this.state.collectibles} collectibleInstance={this.state.collectibleInstance} account={this.state.account}/>)}/>
             <Route path='/create' render={() => (<CreateCollectible{...this.state}/>)}/>
             <Route path='/collectible' component={CollectibleBack}/>
             <Route path = '/profile' render ={() => (<Profile collectibles={this.state.myCollectibles} address = {this.state.account}/>)}/>
