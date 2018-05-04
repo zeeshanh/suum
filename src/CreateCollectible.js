@@ -93,6 +93,9 @@ class CreateCollectible extends React.Component {
           <input className="create-collectible-input" type="text" value={this.state.imgLink} onChange={this.handleContentChange} />
 
         <br/>
+          Upload:
+        <input type="file" id="myFile" size="50"/>
+        <br/>
           </div>
         <div className="create-collectible-field">
           Quantity:
