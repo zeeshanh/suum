@@ -43,7 +43,6 @@ class CollectibleBack extends Component {
   }
 
   instantiateContract(){
-    console.log(this.props.location.state.collectible[5].toString());
 
     $("#price").hide();
     $("#gift").hide();
@@ -74,7 +73,7 @@ class CollectibleBack extends Component {
 
      //    })
 
-    const address = '0x0e63e2e4e524048ecc1c659fbb1a788d5a27782a'
+    const address = '0x931c8e7c452e6f4fe2118e8ab1b760e995d841fd'
     const Eth = require('ethjs-query')
     const EthContract = require('ethjs-contract')
 
@@ -110,7 +109,7 @@ class CollectibleBack extends Component {
 
   setPrice(event){
     event.preventDefault();
-    const onEth = Number(1000000000000000000);
+    const onEth = Number(1000000000000);
       console.log("New price " + parseInt(this.state.price));
       return this.state.collectibleInstance.setPrice(Number(this.state.identity),Number(this.state.price)*onEth, {from: this.state.accounts[0]})
           .then((result) =>{
@@ -119,9 +118,7 @@ class CollectibleBack extends Component {
   }
 
   buyCollectible(event){
-    console.log(this.props.location.state.collectible[5].toString());
-    console.log(this.state.accounts[0]);
-
+    console.log(this.props.location.state);
     return this.state.collectibleInstance.buyCollectible( Number(this.state.identity),
       {value: this.state.web3.toWei(this.props.location.state.collectible[5],"wei"), from: this.state.accounts[0]})
          .then((result) => {
@@ -148,11 +145,15 @@ class CollectibleBack extends Component {
   render() {
     return (
       <div className="collectible-back">
+      <div className="collectible-back-image">
         {this.props.location.state.collectible[4] ?
           <iframe width="600" height="450" src={this.props.location.state.collectible[4]}></iframe> :
           <img src={this.props.location.state.collectible[3]} height="375" width="275" alt="Missing..."></img>
         }
+      </div>
+      <div className="collectible-back-info">
         <p className="collectible-title">{this.props.location.state.collectible[1]}</p>
+        <p className="collectible-creator-back">by {this.props.location.state.collectible[8]}</p>
         <div className="buy-sell-buttons">
 
           <div className="buy">
@@ -193,12 +194,15 @@ class CollectibleBack extends Component {
 
         </div>
         <div className="collectible-info">
-          <p>Price: {Number(this.props.location.state.collectible[5].toString())/Number(1000000000000000000)}</p>
-          <p>ID: {this.props.location.state.collectible[0].toString()}</p>
+          <p><b>Price:</b> {Number(this.props.location.state.collectible[5].toString())/Number(1000000000000)} ETH</p>
+          <br/>
           {
+            //<p>ID: {this.props.location.state.collectible[0].toString()}</p>
             // <p>Owner: {this.props.location.state.collectible[6]}</p>
           }
-          <p>Owner: {this.props.location.state.collectible[6]}</p>
+          <br/>
+          <br/>
+          <p><b>Owner:</b> {this.props.location.state.collectible[6]}</p>
         </div>
         <p>{this.props.location.state.collectible[2]}</p>
 
@@ -222,6 +226,7 @@ class CollectibleBack extends Component {
         </form>
         </div>
 
+      </div>
       </div>
 
 
