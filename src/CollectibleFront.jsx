@@ -2,9 +2,11 @@ import React, {Component} from 'react';
 import {Link, Route, Switch} from 'react-router-dom';
 
 class CollectibleFront extends Component {
-  // constructor(props) {
-  //   super(props)
-  // }
+  constructor(props) {
+    super(props)
+
+    console.log(this.props);
+  }
 
   componentWillMount() {
 
@@ -13,7 +15,7 @@ class CollectibleFront extends Component {
   render() {
     return (
       <div className = "collectibleView">
-      <Link to={{pathname: '/collectible', state:{collectible: this.props.collectible}}} >
+      <Link to={{pathname: '/collectible', state:{collectible: this.props.collectible, account: this.props.account, collectibleInstance: this.props.collectibleInstance}}} >
         <img className="collectible-front" src={this.props.image} border-radius="25px" height="375" width="275" alt="Missing..."></img>
       </Link>
       <div className = "collectible-details">

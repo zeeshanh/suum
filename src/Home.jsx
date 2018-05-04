@@ -8,14 +8,13 @@ class Home extends Component {
   // }
 
   componentWillMount() {
-
   }
 
   render() {
     return (
       <div className="collectibles-container">
           {this.props.collectibles.length > 0 ? this.props.collectibles.map((collectibleArr, i) => {
-            return <CollectibleFront key={i} image={collectibleArr[3]} collectible={collectibleArr}/>
+            return <CollectibleFront key={i} image={collectibleArr[3]} collectible={collectibleArr} collectibleInstance={this.props.collectibleInstance} account={this.props.account}/>
           }) : "Loading..."}
       </div>
     );

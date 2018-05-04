@@ -2,12 +2,13 @@ import React, {Component} from 'react';
 import Popup from 'react-popup';
 
 class CollectibleBack extends Component {
-   //constructor(props) {
-    // super(props)
-  // }
+   constructor(props) {
+    super(props)
+
+    console.log(this.props);
+  }
 
   componentWillMount() {
-
   }
 
   giftCollectible(event){
@@ -20,7 +21,14 @@ class CollectibleBack extends Component {
   }
 
   buyCollectible(event){
-
+    console.log(this.props.location.state);
+    var collectibleInstance = this.props.location.state.collectibleInstance;
+    var account= this.props.location.state.account;
+    return collectibleInstance.buyCollectible( this.props.location.state.collectible[0], 
+      {value: this.state.web3.toWei(this.props.location.state.collectible[5],"wei"), from: account})
+         .then((result) => {
+           console.log(result);
+        })
   }
 
   render() {
