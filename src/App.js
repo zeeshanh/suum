@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-import Collection from '../build/contracts/Collection.json'
-import Collectible from '../build/contracts/Collectible.json'
+//import Collection from '../build/contracts/Collection.json'
+//import Collectible from '../build/contracts/Collectible.json'
 import getWeb3 from './utils/getWeb3'
 import CreateCollectible from './CreateCollectible'
 import {Link, Route, Switch} from 'react-router-dom';
@@ -108,85 +108,85 @@ class App extends Component {
   })
   }
 
-  instantiateContract() {
-    /*
-     * SMART CONTRACT EXAMPLE
-     *
-     * Normally these functions would be called in the context of a
-     * state management library, but for convenience I've placed them here.
-     */
+  // instantiateContract() {
+  //   /*
+  //    * SMART CONTRACT EXAMPLE
+  //    *
+  //    * Normally these functions would be called in the context of a
+  //    * state management library, but for convenience I've placed them here.
+  //    */
 
    
 
-    const contract = require('truffle-contract')
-    const collection = contract(Collection)
-    const collectible = contract(Collectible)
+  //   const contract = require('truffle-contract')
+  //   const collection = contract(Collection)
+  //   const collectible = contract(Collectible)
 
-    collection.setProvider(this.state.web3.currentProvider)
-    collectible.setProvider(this.state.web3.currentProvider)
+  //   collection.setProvider(this.state.web3.currentProvider)
+  //   collectible.setProvider(this.state.web3.currentProvider)
 
-    // Declaring this for later so we can chain functions on SimpleStorage.
-    var collectionInstance
-    var collectibleInstance
-    var localCollectibles = [];
-    var collectiblePromises = [];
+  //   // Declaring this for later so we can chain functions on SimpleStorage.
+  //   var collectionInstance
+  //   var collectibleInstance
+  //   var localCollectibles = [];
+  //   var collectiblePromises = [];
 
-    // // Get accounts.
-    this.state.web3.eth.getAccounts((error, accounts) => {
-      this.setState({account:accounts[0]})
-      console.log(accounts);
-      collection.deployed().then((instance) => {
-        console.log("DEPOLYED")
-        collectionInstance = instance
-        this.setState({collectionInstance: instance})
+  //   // // Get accounts.
+  //   this.state.web3.eth.getAccounts((error, accounts) => {
+  //     this.setState({account:accounts[0]})
+  //     console.log(accounts);
+  //     collection.deployed().then((instance) => {
+  //       console.log("DEPOLYED")
+  //       collectionInstance = instance
+  //       this.setState({collectionInstance: instance})
 
-        //collectionInstance._createCol("Innerbloom", "Innerbloom by Rufus du Sol", "https://www.allthingsgomusic.com/wp-content/uploads/2015/11/rufus-du-sol-innerbloom-e1447974459586.jpg", "https://www.youtube.com/embed/IA1liCmUsAM", 1, {from:accounts[0]})
+  //       //collectionInstance._createCol("Innerbloom", "Innerbloom by Rufus du Sol", "https://www.allthingsgomusic.com/wp-content/uploads/2015/11/rufus-du-sol-innerbloom-e1447974459586.jpg", "https://www.youtube.com/embed/IA1liCmUsAM", 1, {from:accounts[0]})
 
-        return collectionInstance.collectibleToOwner.call(0)
-      }).then((result) => {
-        console.log(result);
-        return collectionInstance._createCol("Busy Earnin", "Busy Earnin by Jungle", "https://images.genius.com/e64c86234196aea00f6fe89923861476.1000x1000x1.jpg", "https://www.youtube.com/watch?v=BcsfftwLUf0", 10, 50, "Zeeshan",{from: accounts[0]})
-         //return collectionInstance._createCol("Innerbloom", "Innerbloom by Rufus du Sol", "https://images.genius.com/a7476d42435ba6e34c7015fcb635cca6.1000x1000x1.jpg", "https://www.youtube.com/watch?v=IA1liCmUsAM", 10, {from: accounts[0]})
-       }).then((result) =>{
-         return collectionInstance.collectibles.call(0)
-      }).then((result) => {
-        console.log('TEST')
-        return collectionInstance.getCollectiblesLength()
-      }).then((result) => {
-        console.log('Huh..')
-        var lengthOfCollectibles = result.c[0];
-        for (var i = 0; i < lengthOfCollectibles; i++) {
-          var localPromise = collectionInstance.getCollectibleByIndex(i)
-          collectiblePromises.push(localPromise);
-        }
-        return collectionInstance.getCollectibleByIndex(0);
-      }).then(result => {
-        localCollectibles.push(result)
-        return Promise.all(collectiblePromises)
-      }).then(values => {
-        console.log("vals...", values)
-        this.setState({collectibles: values})
+  //       return collectionInstance.collectibleToOwner.call(0)
+  //     }).then((result) => {
+  //       console.log(result);
+  //       return collectionInstance._createCol("Busy Earnin", "Busy Earnin by Jungle", "https://images.genius.com/e64c86234196aea00f6fe89923861476.1000x1000x1.jpg", "https://www.youtube.com/watch?v=BcsfftwLUf0", 10, 50, "Zeeshan",{from: accounts[0]})
+  //        //return collectionInstance._createCol("Innerbloom", "Innerbloom by Rufus du Sol", "https://images.genius.com/a7476d42435ba6e34c7015fcb635cca6.1000x1000x1.jpg", "https://www.youtube.com/watch?v=IA1liCmUsAM", 10, {from: accounts[0]})
+  //      }).then((result) =>{
+  //        return collectionInstance.collectibles.call(0)
+  //     }).then((result) => {
+  //       console.log('TEST')
+  //       return collectionInstance.getCollectiblesLength()
+  //     }).then((result) => {
+  //       console.log('Huh..')
+  //       var lengthOfCollectibles = result.c[0];
+  //       for (var i = 0; i < lengthOfCollectibles; i++) {
+  //         var localPromise = collectionInstance.getCollectibleByIndex(i)
+  //         collectiblePromises.push(localPromise);
+  //       }
+  //       return collectionInstance.getCollectibleByIndex(0);
+  //     }).then(result => {
+  //       localCollectibles.push(result)
+  //       return Promise.all(collectiblePromises)
+  //     }).then(values => {
+  //       console.log("vals...", values)
+  //       this.setState({collectibles: values})
 
-        var mine= values.filter(function(col){
-          return col[6] == accounts[0];
-        });
+  //       var mine= values.filter(function(col){
+  //         return col[6] == accounts[0];
+  //       });
 
-        console.log(mine);
-        this.setState({myCollectibles: mine})
+  //       console.log(mine);
+  //       this.setState({myCollectibles: mine})
 
-      })
+  //     })
 
-      collectible.deployed().then((instance) => {
-        collectibleInstance = instance
-         this.setState({collectibleInstance: instance})
+  //     collectible.deployed().then((instance) => {
+  //       collectibleInstance = instance
+  //        this.setState({collectibleInstance: instance})
         
-        })
+  //       })
 
-     // })
+  //    // })
 
-    })
+  //   })
 
-  }
+  //}
 
 
   render() {
