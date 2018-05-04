@@ -481,6 +481,10 @@ export const abi = [
       {
         "name": "",
         "type": "string"
+      },
+      {
+        "name": "",
+        "type": "bool"
       }
     ],
     "payable": false,
