@@ -12,10 +12,31 @@ class Home extends Component {
 
   render() {
     return (
-      <div className="collectibles-container">
-          {this.props.collectibles.length > 0 ? this.props.collectibles.map((collectibleArr, i) => {
-            return <CollectibleFront key={i} image={collectibleArr[3]} collectible={collectibleArr} collectibleInstance={this.props.collectibleInstance} account={this.props.account}/>
-          }) : "Loading..."}
+      <div className="home-container">
+      <h2>Featured</h2>
+      <div className="collectibles-stream">
+        <div className="collectibles-container">
+            {this.props.collectibles.length > 0 ? this.props.collectibles.map((collectibleArr, i) => {
+              return <CollectibleFront key={i} image={collectibleArr[3]} collectible={collectibleArr}/>
+            }) : "Loading..."}
+        </div>
+      </div>
+      <h2>Newest</h2>
+      <div className="collectibles-stream">
+        <div className="collectibles-container">
+            {this.props.collectibles.length > 0 ? this.props.collectibles.map((collectibleArr, i) => {
+              return <CollectibleFront key={i} image={collectibleArr[3]} collectible={collectibleArr}/>
+            }) : "Loading..."}
+        </div>
+      </div>
+      <h2>Other</h2>
+      <div className="collectibles-stream">
+        <div className="collectibles-container">
+            {this.props.collectibles.length > 0 ? this.props.collectibles.map((collectibleArr, i) => {
+              return <CollectibleFront key={i} image={collectibleArr[3]} collectible={collectibleArr} collectibleInstance={this.props.collectibleInstance} account={this.props.account}/>
+            }) : "Loading..."}
+        </div>
+      </div>
       </div>
     );
   }

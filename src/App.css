@@ -1,7 +1,7 @@
 /* PAGE */
 
 body {
-  background-color: #ededed;
+  background-color: #d9e9ff;
 }
 
 body,
@@ -25,7 +25,7 @@ code {
   width: 100%;
   padding: 45px 20px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   margin-top: 50px;
 }
 
@@ -34,7 +34,7 @@ code {
   justify-content: center;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .collectible-back {
@@ -97,18 +97,40 @@ form input {
   display: flex;
   justify-content: space-evenly;
   background-color: black;
-  height: 50px;
+  height: 75px;
   margin: 0;
   list-style-type: none;
   align-items: center;
   position: fixed;
   width: 100%;
   top: 0;
+  font-size: 1em;
+  letter-spacing: 2px;
 }
 
 .simple-navbar a {
   text-decoration: none;
   color: #FFF;
+}
+
+.navbar-left {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.navbar-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.navbar-item {
+  padding: 0 25px;
+}
+
+#logo {
+  padding: 0 5px;
 }
 
 .navbar {
@@ -129,15 +151,94 @@ form input {
 }
 
 .navbar .pure-menu-heading {
-  font-weight: bold;
+  /* font-weight: bold; */
   text-transform: none;
 }
 
-.navbar .navbar-right {
+/* .navbar .navbar-right {
   float: right;
-}
+} */
 
 .navbar .uport-logo {
   height: 16px;
   margin-right: 10px;
+}
+
+.logo-image {
+  width: 50px;
+}
+
+.buy-sell-buttons {
+  display: flex;
+}
+
+.collectible-button {
+  padding: 20px 25px;
+}
+
+.create-collectible-form {
+  justify-content: center;
+  width:100%;
+  padding: 0 300px;
+}
+
+.collectible-back {
+  justify-content: center;
+  width:100%;
+}
+
+.my-collectibles {
+  justify-content: space-between;
+  width:100%;
+  flex-direction: row;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 50px;
+  padding: 20px;
+}
+
+.collectibles-stream {
+  display: flex;
+  overflow-x: auto;
+  margin-bottom: 100px;
+  margin-left: 100px;
+}
+
+.home-container {
+  overflow-x: auto;
+}
+
+.logo-text {
+  padding-left: 1px;
+}
+
+.create-collectible-input {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #B743FF;
+    width: 90%;
+
+}
+
+.create-collectible-field {
+  margin-top: 25px;
+}
+
+h2 {
+  padding-left: 50px;
+}
+
+.collectibleView {
+  padding: 10px;
+}
+
+.collectible-button {
+  color: white;
+  background-color: #B743FF;
+  width: 95px;
+  height: 44px;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 25px 10px;
 }

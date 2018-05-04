@@ -62,7 +62,7 @@ class CollectibleBack extends Component {
      // collectible.deployed().then((instance) => {
      //    collectibleInstance = instance
      //     this.setState({collectibleInstance: instance})
-        
+
      //    })
 
     const address = '0x931c8e7c452e6f4fe2118e8ab1b760e995d841fd'
@@ -111,7 +111,7 @@ class CollectibleBack extends Component {
 
   buyCollectible(event){
     console.log(this.props.location.state);
-    return this.state.collectibleInstance.buyCollectible( Number(this.state.identity), 
+    return this.state.collectibleInstance.buyCollectible( Number(this.state.identity),
       {value: this.state.web3.toWei(this.props.location.state.collectible[5],"wei"), from: this.state.accounts[0]})
          .then((result) => {
            console.log(result);
@@ -134,6 +134,39 @@ class CollectibleBack extends Component {
           <img src={this.props.location.state.collectible[3]} height="375" width="275" alt="Missing..."></img>
         }
         <p className="collectible-title">{this.props.location.state.collectible[1]}</p>
+        <div className="buy-sell-buttons">
+
+          <div className="buy">
+          <button className="collectible-button" onClick={this.buyCollectible.bind(this)}>
+            Buy
+          </button>
+          </div>
+
+          <div className="sell">
+          <button className="collectible-button" onClick={this.setPrice.bind(this)}>
+            Sell
+          </button>
+          </div>
+
+          <div className="gift">
+          <button className="collectible-button" onClick={this.giftCollectible.bind(this)}>
+            Gift
+          </button>
+          </div>
+
+          <div className="download">
+          <button className="collectible-button" onClick={this.giftCollectible.bind(this)}>
+            Download
+          </button>
+          </div>
+
+          <div className="remix">
+          <button className="collectible-button" onClick={this.giftCollectible.bind(this)}>
+            Remix
+          </button>
+          </div>
+
+        </div>
         <div className="collectible-info">
           <p>Price: {Number(this.props.location.state.collectible[5].toString())/Number(1000000000000)}</p>
           <p>ID: {this.props.location.state.collectible[0].toString()}</p>
@@ -172,7 +205,7 @@ class CollectibleBack extends Component {
 
       </div>
 
-      
+
     );
   }
 }

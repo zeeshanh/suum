@@ -62,27 +62,43 @@ class CreateCollectible extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="create-collectible-form">
       <h2> Create New Collectible: </h2>
       <form onSubmit={this.handleSubmit}>
+        <div className="create-collectible-field">
           Creator:
-          <input type="text" value={this.state.Creator} onChange={this.handleCreatorChange} />
+          <br/>
+          <input className="create-collectible-input" type="text" value={this.state.Creator} onChange={this.handleCreatorChange} />
+        </div>
+        <div className="create-collectible-field">
           <br/>
           Name:
-          <input type="text" value={this.state.Name} onChange={this.handleNameChange} />
           <br/>
+          <input className="create-collectible-input" type="text" value={this.state.Name} onChange={this.handleNameChange} />
+          <br/>
+        </div>
+        <div className="create-collectible-field">
           Description:
-          <input type="text" value={this.state.desc} onChange={this.handleDescChange} />
+          <input className="create-collectible-input" type="text" value={this.state.desc} onChange={this.handleDescChange} />
           <br/>
+        </div>
+        <div className="create-collectible-field">
           Price:
-          <input type="text" value={this.state.price} onChange={this.handlePriceChange} />
+          <input className="create-collectible-input" type="text" value={this.state.price} onChange={this.handlePriceChange} />
+        </div>
+          <div className="create-collectible-field">
           <br/>
           Image URL :
-          <input type="text" value={this.state.imgLink} onChange={this.handleContentChange} />
+          <input className="create-collectible-input" type="text" value={this.state.imgLink} onChange={this.handleContentChange} />
+
         <br/>
+          </div>
+        <div className="create-collectible-field">
           Quantity:
-          <input type="text" value={this.state.quantity} onChange={this.handleQuantityChange}/>
+          <input className="create-collectible-input" type="text" value={this.state.quantity} onChange={this.handleQuantityChange}/>
           <br/>
+          </div>
+
         <input type="submit" value="Create" />
       </form>
       </div>

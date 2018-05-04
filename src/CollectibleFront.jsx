@@ -20,7 +20,7 @@ class CollectibleFront extends Component {
       </Link>
       <div className = "collectible-details">
         <div className = "collectible-Name">
-        Name: {this.props.collectible[1]}
+          {this.props.collectible[1]}
         </div>
 
         <div className = "collectible_price">

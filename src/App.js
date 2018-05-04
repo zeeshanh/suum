@@ -55,7 +55,7 @@ class App extends Component {
   }
 
   rinkeby(){
-    
+
 
     this.state.web3.eth.getAccounts((error, accounts) => {
       this.setState({account:accounts[0]})
@@ -116,7 +116,7 @@ class App extends Component {
   //    * state management library, but for convenience I've placed them here.
   //    */
 
-   
+
 
   //   const contract = require('truffle-contract')
   //   const collection = contract(Collection)
@@ -179,7 +179,7 @@ class App extends Component {
   //     collectible.deployed().then((instance) => {
   //       collectibleInstance = instance
   //        this.setState({collectibleInstance: instance})
-        
+
   //       })
 
   //    // })
@@ -192,9 +192,8 @@ class App extends Component {
   render() {
 
     var simpleNavItems = [
-      {url: "/", text: "SUUM"},
-      {url: "/", text: "Marketplace"},
-      {url: "/create", text: "Create Collectible"},
+      {image: "https://i.imgur.com/6EU6F7v.png"},
+      {url: "/create", text: "Submit"},
       {url: "/profile", text: "My Collectibles"},
     ]
 
