@@ -51,12 +51,21 @@ contract Collectible is Collection, ERC721 {
     return true;
 
   }
+<<<<<<< HEAD
 
   function setPrice(uint256 _tokenId, uint price) public onlyOwnerOf(_tokenId) {
       collectibles[_tokenId].price = price;
   }
 
  function gift(uint256 _tokenId, address _to) public onlyOwnerOf(_tokenId){
+=======
+  
+  function setPrice(uint256 _tokenId, uint price) public{
+      collectibles[_tokenId].price = price; 
+  }
+ 
+ function gift(uint256 _tokenId, address _to) public{
+>>>>>>> 3763c6a00d065e5401b7830797c3d3a756cfaab7
      _transfer(msg.sender, _to, _tokenId);
  }
 
