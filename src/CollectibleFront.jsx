@@ -15,7 +15,7 @@ class CollectibleFront extends Component {
   render() {
     return (
       <div className = "collectibleView">
-      <Link to={{pathname: '/collectible', state:{collectible: this.props.collectible, account: this.props.account, collectibleInstance: this.props.collectibleInstance}}} >
+      <Link to={{pathname: '/collectible', state:{collectible: this.props.collectible, account: this.props.account}}} >
         <img className="collectible-front" src={this.props.image} border-radius="25px" height="375" width="275" alt="Missing..."></img>
       </Link>
       <div className = "collectible-details">

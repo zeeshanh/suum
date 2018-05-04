@@ -46,12 +46,14 @@ class CreateCollectible extends React.Component {
   }
 
   handleSubmit(event) {
+    event.preventDefault();
     if (this.state.creator === "" || this.state.Name === "" || this.state.desc === "" || this.state.price === "" || this.state.imgLink === ""|| isNaN(this.state.price) || isNaN(this.state.quantity)){
           alert("Invalid input format");
         }
     else{
       this.props.web3.eth.getAccounts((error, accounts) => {
-      this.props.collectionInstance._createCol(this.state.Name,this.state.desc, this.state.imgLink, "", this.state.price, this.state.quantity, this.state.creator,{from: accounts[0]});
+        console.log(accounts);
+      this.props.collectibleInstance._createCol(this.state.Name,this.state.desc, this.state.imgLink, "", this.state.price, this.state.quantity, this.state.creator,{from: accounts[0]});
       window.location = '/profile'
       })
     }

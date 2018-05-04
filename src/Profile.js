@@ -17,7 +17,7 @@ class Profile extends Component {
       <p>My address: {this.props.address}</p>
         <div>
           {this.props.collectibles.length > 0 ? this.props.collectibles.map((collectibleArr, i) => {
-            return <CollectibleFront key={i} image={collectibleArr[3]} collectible={collectibleArr}/>
+            return <CollectibleFront key={i} image={collectibleArr[3]} collectible={collectibleArr} account = {this.props.account}/>
           }) : "Loading..."}
         </div>
 

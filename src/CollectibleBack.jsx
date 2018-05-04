@@ -1,31 +1,106 @@
 import React, {Component} from 'react';
 import Popup from 'react-popup';
+import Collectible from '../build/contracts/Collectible.json'
+import getWeb3 from './utils/getWeb3'
+import * as abiVar from './colAbi.js';
 
 class CollectibleBack extends Component {
    constructor(props) {
     super(props)
 
-    console.log(this.props);
+    this.giftCollectible = this.giftCollectible.bind(this);
+    this.handleAddressChange = this.handleAddressChange.bind(this);
+    this.handlePriceChange = this.handlePriceChange.bind(this);
+    this.setPrice = this.setPrice.bind(this);
+
+
+
+    this.state = {
+      price:0,
+      giftAddress:"0x",
+      collectibleInstance:null,
+      web3:null,
+      accounts: null,
+      identity: this.props.location.state.collectible[0]
+    }
+    //console.log(this.props);
+    getWeb3.then(results => {
+      console.log('WEB3', results.web3)
+      this.setState({web3: results.web3})
+
+      // Instantiate contract once web3 provided.
+      this.instantiateContract()
+    }).catch(() => {
+      console.log('Error finding web3.')
+    })
+
+
+  }
+
+  instantiateContract(){
+
+    this.state.web3.eth.getAccounts((error, accounts) => {
+      this.setState({accounts:accounts})
+          })
+
+    const abi = abiVar.abi;
+    console.log(abi);
+    //const contract = require('truffle-contract')
+    ///const collectible = contract(Collectible)
+
+   // collectible.setProvider(this.state.web3.currentProvider)
+
+    //var collectibleInstance
+
+     // collectible.deployed().then((instance) => {
+     //    collectibleInstance = instance
+     //     this.setState({collectibleInstance: instance})
+        
+     //    })
+
+    const address = '0xdb4d60b0d3f76ce0f2e30fa8f4a2962687b9dd75'
+    const Eth = require('ethjs-query')
+    const EthContract = require('ethjs-contract')
+
+    const eth = new Eth(this.state.web3.currentProvider)
+    const contract = new EthContract(eth)
+
+    const collectible = contract(abi)
+    const collectibleInstance = collectible.at(address)
+
+    this.setState({collectibleInstance:collectibleInstance})
   }
 
   componentWillMount() {
   }
 
-  giftCollectible(event){
-      console.log("clicked");
-      Popup.alert('I am alert, nice to meet you');
+  handleAddressChange(event) {
+    this.setState({giftAddress: event.target.value});
   }
 
-  sellCollectible(event){
+  handlePriceChange(event){
+    this.setState({price: event.target.value});
+  }
 
+  giftCollectible(event){
+      event.preventDefault();
+      console.log("Gift to " + this.state.giftAddress);
+      return this.state.collectibleInstance.gift(Number(this.state.identity), this.state.giftAddress, {from: this.state.accounts[0]});
+  }
+
+  setPrice(event){
+    event.preventDefault();
+      console.log("New price " + parseInt(this.state.price));
+      return this.state.collectibleInstance.setPrice(Number(this.state.identity),Number(this.state.price), {from: this.state.accounts[0]})
+          .then((result) =>{
+            console.log(result);
+          })
   }
 
   buyCollectible(event){
     console.log(this.props.location.state);
-    var collectibleInstance = this.props.location.state.collectibleInstance;
-    var account= this.props.location.state.account;
-    return collectibleInstance.buyCollectible( this.props.location.state.collectible[0], 
-      {value: this.state.web3.toWei(this.props.location.state.collectible[5],"wei"), from: account})
+    return this.state.collectibleInstance.buyCollectible( Number(this.state.identity), 
+      {value: this.state.web3.toWei(this.props.location.state.collectible[5],"wei"), from: this.state.accounts[0]})
          .then((result) => {
            console.log(result);
         })
@@ -45,26 +120,29 @@ class CollectibleBack extends Component {
           {
             // <p>Owner: {this.props.location.state.collectible[6]}</p>
           }
-          <p>Owner: Nate</p>
+          <p>Owner: {this.props.location.state.collectible[6]}</p>
         </div>
         <p>{this.props.location.state.collectible[2]}</p>
 
+        <form onSubmit={this.giftCollectible.bind(this)}>
+          <label>
+            Receivers Address:
+            <input type="text" value={this.state.giftAddress} onChange={this.handleAddressChange}/>
+          </label>
+          <input type="submit" value="Gift" />
+        </form>
 
-        <div className="gift">
-        <button onClick={this.giftCollectible.bind(this)}>
-          Gift
-        </button>
-        </div>
+        <form onSubmit={this.setPrice.bind(this)}>
+          <label>
+            New Price:
+            <input type="text" value={this.state.price} onChange={this.handlePriceChange}/>
+          </label>
+          <input type="submit" value="Set Price" />
+        </form>
 
         <div className="buy">
         <button onClick={this.buyCollectible.bind(this)}>
           Buy
-        </button>
-        </div>
-
-        <div className="sell">
-        <button onClick={this.sellCollectible.bind(this)}>
-          Sell
         </button>
         </div>
 
