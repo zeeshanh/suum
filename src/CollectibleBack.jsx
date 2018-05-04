@@ -3,6 +3,7 @@ import Popup from 'react-popup';
 import Collectible from '../build/contracts/Collectible.json'
 import getWeb3 from './utils/getWeb3'
 import * as abiVar from './colAbi.js';
+import $ from 'jquery'
 
 class CollectibleBack extends Component {
    constructor(props) {
@@ -12,7 +13,6 @@ class CollectibleBack extends Component {
     this.handleAddressChange = this.handleAddressChange.bind(this);
     this.handlePriceChange = this.handlePriceChange.bind(this);
     this.setPrice = this.setPrice.bind(this);
-
 
 
     this.state = {
@@ -33,14 +33,19 @@ class CollectibleBack extends Component {
     }).catch(() => {
       console.log('Error finding web3.')
     })
-
-
   }
 
   instantiateContract(){
 
     this.state.web3.eth.getAccounts((error, accounts) => {
       this.setState({accounts:accounts})
+       if(this.props.location.state.collectible[6]==this.state.accounts[0]){
+      $("#buy").hide();
+    }
+    else{
+      $("#gift").hide();
+      $("#price").hide();
+    }
           })
 
     const abi = abiVar.abi;
@@ -69,6 +74,10 @@ class CollectibleBack extends Component {
     const collectibleInstance = collectible.at(address)
 
     this.setState({collectibleInstance:collectibleInstance})
+
+    console.log(this.props.location.state.collectible[6]);
+    console.log(this.state.accounts[0]);
+
   }
 
   componentWillMount() {
@@ -124,6 +133,7 @@ class CollectibleBack extends Component {
         </div>
         <p>{this.props.location.state.collectible[2]}</p>
 
+        <div id = "gift">
         <form onSubmit={this.giftCollectible.bind(this)}>
           <label>
             Receivers Address:
@@ -131,7 +141,9 @@ class CollectibleBack extends Component {
           </label>
           <input type="submit" value="Gift" />
         </form>
+        </div>
 
+        <div id = "price">
         <form onSubmit={this.setPrice.bind(this)}>
           <label>
             New Price:
@@ -139,8 +151,9 @@ class CollectibleBack extends Component {
           </label>
           <input type="submit" value="Set Price" />
         </form>
+        </div>
 
-        <div className="buy">
+        <div id="buy">
         <button onClick={this.buyCollectible.bind(this)}>
           Buy
         </button>

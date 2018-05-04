@@ -50,14 +50,12 @@ class App extends Component {
       // Instantiate contract once web3 provided.
       //this.instantiateContract()
       this.rinkeby()
-    })//.catch(() => {
-      //console.log('Error finding web3.')
-    //})
+    }).catch(() => {
+      console.log('Error finding web3.')
+    })
   }
 
   rinkeby(){
-    const abi = abiVar.abi;
-    console.log(abi);
     
 
     this.state.web3.eth.getAccounts((error, accounts) => {
@@ -65,7 +63,7 @@ class App extends Component {
 
       console.log(accounts);
 
-
+    const abi = abiVar.abi;
     const address = '0xdb4d60b0d3f76ce0f2e30fa8f4a2962687b9dd75'
     const Eth = require('ethjs-query')
     const EthContract = require('ethjs-contract')
@@ -107,12 +105,8 @@ class App extends Component {
 
         console.log(mine);
         this.setState({myCollectibles: mine})
-
-    //  })
     })
-
-          })
-
+  })
   }
 
   instantiateContract() {
