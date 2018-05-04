@@ -24,7 +24,7 @@ class CollectibleFront extends Component {
         </div>
 
         <div className = "collectible_price">
-          Price: {this.props.collectible[5].toString()}
+          Price: {Number(this.props.collectible[5].toString())/Number(1000000000000)}
           </div>
 
         <div className = "collectible_quantity">
