@@ -18,8 +18,7 @@ class Home extends Component {
 
         });
 
-     var reversed = this.props.collectibles;
-     reversed.reverse();
+     var reversed = this.props.collectibles.slice().reverse();
 
      console.log(reversed);
     
