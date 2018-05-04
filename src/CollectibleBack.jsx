@@ -175,7 +175,7 @@ class CollectibleBack extends Component {
             Receivers Address:
             <input type="text" value={this.state.giftAddress} onChange={this.handleAddressChange}/>
           </label>
-          <input type="submit" value="Gift" />
+          <input className="large-submit-button" type="submit" value="Gift" />
         </form>
         </div>
 
@@ -185,7 +185,7 @@ class CollectibleBack extends Component {
             New Price:
             <input type="text" value={this.state.price} onChange={this.handlePriceChange}/>
           </label>
-          <input type="submit" value="Set Price" />
+          <input className="large-submit-button" type="submit" value="Set Price" />
         </form>
         </div>
 

@@ -176,10 +176,15 @@ form input {
   padding: 20px 25px;
 }
 
-.create-collectible-form {
+.create-collectible-container {
+  width: 100%;
+  display: flex;
   justify-content: center;
-  width:100%;
-  padding: 0 300px;
+}
+
+.create-collectible-form {
+  width:50%;
+  align-self: center;
 }
 
 .collectible-back {
@@ -241,4 +246,29 @@ h2 {
   border-radius: 5px;
   padding: 5px;
   margin: 25px 10px;
+}
+
+.large-submit-button {
+  color: white;
+  background-color: #B743FF;
+  width: 145px;
+  height: 55px;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 75px 0px;
+  align-self: center;
+}
+
+
+.collectible-Name {
+  font-size: 1.2em;
+  margin-left: 25px;
+  font-weight: bold;
+}
+
+.collectible-creator {
+  font-size: 1em;
+  margin-left: 25px;
+  margin-top: 5px;
 }

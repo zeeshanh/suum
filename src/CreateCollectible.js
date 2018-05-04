@@ -62,6 +62,7 @@ class CreateCollectible extends React.Component {
 
   render() {
     return (
+      <div className="create-collectible-container">
       <div className="create-collectible-form">
       <h2> Create New Collectible: </h2>
       <form onSubmit={this.handleSubmit}>
@@ -99,8 +100,9 @@ class CreateCollectible extends React.Component {
           <br/>
           </div>
 
-        <input type="submit" value="Create" />
+        <input className="large-submit-button" type="submit" value="Create" />
       </form>
+      </div>
       </div>
     );
   }
