@@ -15,7 +15,9 @@ class CollectibleBack extends Component {
     this.handleAddressChange = this.handleAddressChange.bind(this);
     this.handlePriceChange = this.handlePriceChange.bind(this);
     this.setPrice = this.setPrice.bind(this);
-
+    this.feature = this.feature.bind(this);
+    this.sell = this.sell.bind(this);
+    this.showGift = this.showGift.bind(this);
 
     this.state = {
       price:0,
@@ -25,6 +27,7 @@ class CollectibleBack extends Component {
       accounts: null,
       identity: this.props.location.state.collectible[0]
     }
+
     //console.log(this.props);
     getWeb3.then(results => {
       console.log('WEB3', results.web3)
@@ -35,20 +38,25 @@ class CollectibleBack extends Component {
     }).catch(() => {
       console.log('Error finding web3.')
     })
+
+
   }
 
   instantiateContract(){
 
+    $("#price").hide();
+    $("#gift").hide();
+
     this.state.web3.eth.getAccounts((error, accounts) => {
       this.setState({accounts:accounts})
        if(this.props.location.state.collectible[6]==this.state.accounts[0]){
-      $("#buy").hide();
-    }
-    else{
-      $("#gift").hide();
-      $("#price").hide();
-    }
-          })
+          $(".buy").hide();
+        }
+        else{
+          $(".sell").hide();
+          $(".gift").hide();
+        }
+      })
 
     const abi = abiVar.abi;
     console.log(abi);
@@ -65,7 +73,7 @@ class CollectibleBack extends Component {
 
      //    })
 
-    const address = '0xdb4d60b0d3f76ce0f2e30fa8f4a2962687b9dd75'
+    const address = '0x931c8e7c452e6f4fe2118e8ab1b760e995d841fd'
     const Eth = require('ethjs-query')
     const EthContract = require('ethjs-contract')
 
@@ -118,6 +126,22 @@ class CollectibleBack extends Component {
         })
   }
 
+  feature(event){
+    return this.state.collectibleInstance.feature(Number(this.state.identity),
+      {value: this.state.web3.toWei(0.05,"ether"), from: this.state.accounts[0]})
+       .then((result) => {
+           console.log(result);
+        })
+     }
+
+  sell(event){
+    $("#price").toggle();
+  }
+
+  showGift(event){
+    $("#gift").toggle();
+  }
+
   render() {
     return (
       <div className="collectible-back">
@@ -135,13 +159,13 @@ class CollectibleBack extends Component {
           </div>
 
           <div className="sell">
-          <button className="collectible-button" onClick={this.setPrice.bind(this)}>
+          <button className="collectible-button" onClick={this.sell.bind(this)}>
             Sell
           </button>
           </div>
 
           <div className="gift">
-          <button className="collectible-button" onClick={this.giftCollectible.bind(this)}>
+          <button className="collectible-button" onClick={this.showGift.bind(this)}>
             Gift
           </button>
           </div>
@@ -155,6 +179,12 @@ class CollectibleBack extends Component {
           <div className="remix">
           <button className="collectible-button" onClick={this.giftCollectible.bind(this)}>
             Remix
+          </button>
+          </div>
+
+          <div className="feature">
+          <button className="collectible-button" onClick={this.feature.bind(this)}>
+            Feature
           </button>
           </div>
 
@@ -187,12 +217,6 @@ class CollectibleBack extends Component {
           </label>
           <input className="large-submit-button" type="submit" value="Set Price" />
         </form>
-        </div>
-
-        <div id="buy">
-        <button onClick={this.buyCollectible.bind(this)}>
-          Buy
-        </button>
         </div>
 
       </div>
