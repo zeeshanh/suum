@@ -43,6 +43,7 @@ class CollectibleBack extends Component {
   }
 
   instantiateContract(){
+    console.log(this.props.location.state.collectible[5].toString());
 
     $("#price").hide();
     $("#gift").hide();
@@ -109,7 +110,7 @@ class CollectibleBack extends Component {
 
   setPrice(event){
     event.preventDefault();
-    const onEth = Number(1000000000000);
+    const onEth = Number(1000000000000000000);
       console.log("New price " + parseInt(this.state.price));
       return this.state.collectibleInstance.setPrice(Number(this.state.identity),Number(this.state.price)*onEth, {from: this.state.accounts[0]})
           .then((result) =>{
@@ -118,7 +119,9 @@ class CollectibleBack extends Component {
   }
 
   buyCollectible(event){
-    console.log(this.props.location.state);
+    console.log(this.props.location.state.collectible[5].toString());
+    console.log(this.state.accounts[0]);
+
     return this.state.collectibleInstance.buyCollectible( Number(this.state.identity),
       {value: this.state.web3.toWei(this.props.location.state.collectible[5],"wei"), from: this.state.accounts[0]})
          .then((result) => {
@@ -190,7 +193,7 @@ class CollectibleBack extends Component {
 
         </div>
         <div className="collectible-info">
-          <p>Price: {Number(this.props.location.state.collectible[5].toString())/Number(1000000000000)}</p>
+          <p>Price: {Number(this.props.location.state.collectible[5].toString())/Number(1000000000000000000)}</p>
           <p>ID: {this.props.location.state.collectible[0].toString()}</p>
           {
             // <p>Owner: {this.props.location.state.collectible[6]}</p>
