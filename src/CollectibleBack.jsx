@@ -112,7 +112,7 @@ class CollectibleBack extends Component {
   buyCollectible(event){
     console.log(this.props.location.state);
     return this.state.collectibleInstance.buyCollectible( Number(this.state.identity), 
-      {value: this.state.web3.toWei(this.props.location.state.collectible[5],"ether"), from: this.state.accounts[0]})
+      {value: this.state.web3.toWei(this.props.location.state.collectible[5],"wei"), from: this.state.accounts[0]})
          .then((result) => {
            console.log(result);
         })
