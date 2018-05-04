@@ -73,7 +73,7 @@ class CollectibleBack extends Component {
 
      //    })
 
-    const address = '0x84e7c37330dadeec0426c6b42b0a334f71118f92'
+    const address = '0x0e63e2e4e524048ecc1c659fbb1a788d5a27782a'
     const Eth = require('ethjs-query')
     const EthContract = require('ethjs-contract')
 
