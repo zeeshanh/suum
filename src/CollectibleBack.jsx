@@ -65,7 +65,7 @@ class CollectibleBack extends Component {
         
      //    })
 
-    const address = '0xdb4d60b0d3f76ce0f2e30fa8f4a2962687b9dd75'
+    const address = '0x931c8e7c452e6f4fe2118e8ab1b760e995d841fd'
     const Eth = require('ethjs-query')
     const EthContract = require('ethjs-contract')
 
@@ -114,6 +114,14 @@ class CollectibleBack extends Component {
     return this.state.collectibleInstance.buyCollectible( Number(this.state.identity), 
       {value: this.state.web3.toWei(this.props.location.state.collectible[5],"wei"), from: this.state.accounts[0]})
          .then((result) => {
+           console.log(result);
+        })
+  }
+
+  feature(event){
+    return this.state.collectibleInstance.feature(Number(this.state.identity),
+      {value: this.state.web3.toWei(Number(0.05),"ether"), from: this.state.accounts[0]})
+       .then((result) => {
            console.log(result);
         })
   }
