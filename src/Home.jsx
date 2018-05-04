@@ -5,10 +5,6 @@ import CollectibleBack from './CollectibleBack';
 class Home extends Component {
   constructor(props) {
     super(props)
-
-
-   
-
   }
 
   componentWillMount() {
@@ -21,6 +17,11 @@ class Home extends Component {
           return col[9] == true;
 
         });
+
+     var reversed = this.props.collectibles;
+     reversed.reverse();
+
+     console.log(reversed);
     
     return (
       <div className="home-container">
@@ -36,7 +37,7 @@ class Home extends Component {
       <h2>Newest</h2>
       <div className="collectibles-stream">
         <div className="collectibles-container">
-            {this.props.collectibles.length > 0 ? this.props.collectibles.map((collectibleArr, i) => {
+            {this.props.collectibles.length > 0 ? reversed.map((collectibleArr, i) => {
               return <CollectibleFront key={i} image={collectibleArr[3]} collectible={collectibleArr}/>
             }) : "Loading..."}
         </div>
