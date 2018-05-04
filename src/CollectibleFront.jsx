@@ -14,11 +14,11 @@ class CollectibleFront extends Component {
     return (
       <div className = "collectibleView">
       <Link to={{pathname: '/collectible', state:{collectible: this.props.collectible}}} >
-        <img className="collectible-front" src={this.props.image} border-radius="25px" height="375" width="275" alt="Missing..."></img>
+        <img className="collectible-front" src={this.props.image} height="375" width="275" alt="Missing..."></img>
       </Link>
       <div className = "collectible-details">
         <div className = "collectible-Name">
-        Name: {this.props.collectible[1]}
+          {this.props.collectible[1]}
         </div>
 
         <div className = "collectible_price">

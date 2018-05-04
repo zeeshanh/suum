@@ -8,19 +8,17 @@ class Profile extends Component {
   // }
 
   componentWillMount() {
+  //  <p>My address: {this.props.address}</p>
 
   }
 
   render() {
     return (
-      <div>
-      <p>My address: {this.props.address}</p>
-        <div>
-          {this.props.collectibles.length > 0 ? this.props.collectibles.map((collectibleArr, i) => {
-            return <CollectibleFront key={i} image={collectibleArr[3]} collectible={collectibleArr}/>
-          }) : "Loading..."}
-        </div>
+      <div className="my-collectibles">
 
+            {this.props.collectibles.length > 0 ? this.props.collectibles.map((collectibleArr, i) => {
+              return <CollectibleFront key={i} image={collectibleArr[3]} collectible={collectibleArr}/>
+            }) : "Loading..."}
       </div>
     );
   }

@@ -86,9 +86,9 @@ class App extends Component {
         return collectionInstance.collectibleToOwner.call(0)
       }).then((result) => {
         console.log(result);
-        //return collectionInstance._createCol("Busy Earnin", "Busy Earnin by Jungle", "https://images.genius.com/e64c86234196aea00f6fe89923861476.1000x1000x1.jpg", "https://www.youtube.com/watch?v=BcsfftwLUf0", 10, 50, "Zeeshan",{from: accounts[0]})
+        return collectionInstance._createCol("Busy Earnin", "Busy Earnin by Jungle", "https://images.genius.com/e64c86234196aea00f6fe89923861476.1000x1000x1.jpg", "https://www.youtube.com/watch?v=BcsfftwLUf0", 10, 50, "Zeeshan",{from: accounts[0]})
          //return collectionInstance._createCol("Innerbloom", "Innerbloom by Rufus du Sol", "https://images.genius.com/a7476d42435ba6e34c7015fcb635cca6.1000x1000x1.jpg", "https://www.youtube.com/watch?v=IA1liCmUsAM", 10, {from: accounts[0]})
-       //}).then((result) =>{
+       }).then((result) =>{
          return collectionInstance.collectibles.call(0)
       }).then((result) => {
         console.log('TEST')
@@ -120,7 +120,7 @@ class App extends Component {
       collectible.deployed().then((instance) => {
         collectibleInstance = instance
          this.setState({collectibleInstance: instance})
-        
+
         })
 
      // })
@@ -133,9 +133,8 @@ class App extends Component {
   render() {
 
     var simpleNavItems = [
-      {url: "/", text: "SUUM"},
-      {url: "/", text: "Marketplace"},
-      {url: "/create", text: "Create Collectible"},
+      {image: "https://i.imgur.com/6EU6F7v.png"},
+      {url: "/create", text: "Submit"},
       {url: "/profile", text: "My Collectibles"},
     ]
 
@@ -161,6 +160,7 @@ class App extends Component {
             <Route exact path='/' render={() => (<Home collectibles={this.state.collectibles} collectibleInstance={this.state.collectibleInstance} account={this.state.account}/>)}/>
             <Route path='/create' render={() => (<CreateCollectible{...this.state}/>)}/>
             <Route path='/collectible' component={CollectibleBack}/>
+            <Route path = '/marketplace' render ={() => (<Profile collectibles={this.state.collectibles} address = {this.state.account}/>)}/>
             <Route path = '/profile' render ={() => (<Profile collectibles={this.state.myCollectibles} address = {this.state.account}/>)}/>
           </Switch>
         </main>
