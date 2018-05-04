@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Popup from 'react-popup';
-import Collectible from '../build/contracts/Collectible.json'
+//import Collectible from '../build/contracts/Collectible.json'
 import getWeb3 from './utils/getWeb3'
 import * as abiVar from './colAbi.js';
 import $ from 'jquery'
