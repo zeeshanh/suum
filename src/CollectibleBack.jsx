@@ -43,6 +43,7 @@ class CollectibleBack extends Component {
   }
 
   instantiateContract(){
+    console.log(this.props.location.state.collectible[5].toString());
 
     $("#price").hide();
     $("#gift").hide();
@@ -73,7 +74,7 @@ class CollectibleBack extends Component {
 
      //    })
 
-    const address = '0x931c8e7c452e6f4fe2118e8ab1b760e995d841fd'
+    const address = '0x0e63e2e4e524048ecc1c659fbb1a788d5a27782a'
     const Eth = require('ethjs-query')
     const EthContract = require('ethjs-contract')
 
@@ -109,7 +110,7 @@ class CollectibleBack extends Component {
 
   setPrice(event){
     event.preventDefault();
-    const onEth = Number(1000000000000);
+    const onEth = Number(1000000000000000000);
       console.log("New price " + parseInt(this.state.price));
       return this.state.collectibleInstance.setPrice(Number(this.state.identity),Number(this.state.price)*onEth, {from: this.state.accounts[0]})
           .then((result) =>{
@@ -118,7 +119,9 @@ class CollectibleBack extends Component {
   }
 
   buyCollectible(event){
-    console.log(this.props.location.state);
+    console.log(this.props.location.state.collectible[5].toString());
+    console.log(this.state.accounts[0]);
+
     return this.state.collectibleInstance.buyCollectible( Number(this.state.identity),
       {value: this.state.web3.toWei(this.props.location.state.collectible[5],"wei"), from: this.state.accounts[0]})
          .then((result) => {

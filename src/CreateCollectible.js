@@ -51,7 +51,7 @@ class CreateCollectible extends React.Component {
           alert("Invalid input format");
         }
     else{
-      const onEth = Number(1000000000000);
+      const onEth = Number(1000000000000000000);
       this.props.web3.eth.getAccounts((error, accounts) => {
         console.log(accounts);
       this.props.collectibleInstance._createCol(this.state.Name,this.state.desc, this.state.imgLink, "", Number(this.state.price)*onEth, this.state.quantity, this.state.creator,{from: accounts[0]});
@@ -92,6 +92,9 @@ class CreateCollectible extends React.Component {
           Image URL :
           <input className="create-collectible-input" type="text" value={this.state.imgLink} onChange={this.handleContentChange} />
 
+        <br/>
+          Upload:
+        <input type="file" id="myFile" size="50"/>
         <br/>
           </div>
         <div className="create-collectible-field">

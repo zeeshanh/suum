@@ -63,7 +63,7 @@ class App extends Component {
       console.log(accounts);
 
     const abi = abiVar.abi;
-    const address = '0x931c8e7c452e6f4fe2118e8ab1b760e995d841fd'
+    const address = '0x0e63e2e4e524048ecc1c659fbb1a788d5a27782a'
     const Eth = require('ethjs-query')
     const EthContract = require('ethjs-contract')
     const BN = require('bn.js')

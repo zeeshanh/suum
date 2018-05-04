@@ -3,20 +3,32 @@ import CollectibleFront from './CollectibleFront';
 import CollectibleBack from './CollectibleBack';
 
 class Home extends Component {
-  // constructor(props) {
-  //   super(props)
-  // }
+  constructor(props) {
+    super(props)
+
+
+   
+
+  }
 
   componentWillMount() {
   }
 
   render() {
+    var featured = this.props.collectibles;
+     featured= featured.filter(function(col){
+        console.log("halfdhfdhkfs" + col[9]);
+          return col[9] == true;
+
+        });
+    
     return (
       <div className="home-container">
       <h2>Featured</h2>
       <div className="collectibles-stream">
         <div className="collectibles-container">
-            {this.props.collectibles.length > 0 ? this.props.collectibles.map((collectibleArr, i) => {
+        
+            {this.props.collectibles.length > 0 ? featured.map((collectibleArr, i) => {
               return <CollectibleFront key={i} image={collectibleArr[3]} collectible={collectibleArr}/>
             }) : "Loading..."}
         </div>
