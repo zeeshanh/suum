@@ -55,10 +55,7 @@ code {
   border-color: black;
 }
 
-.collectible-title {
-  font-size: 2em;
-  margin-bottom: 10px;
-}
+
 
 .collectible-info {
   font-size: 1.2em;
@@ -190,6 +187,14 @@ form input {
 .collectible-back {
   justify-content: center;
   width:100%;
+  flex-direction: row;
+  margin-left: 70px;
+}
+
+.collectible-back-info {
+  align-self: flex-start;
+  margin-left: 25px;
+  width: 75%;
 }
 
 .my-collectibles {
@@ -245,7 +250,7 @@ h2 {
   border: none;
   border-radius: 5px;
   padding: 5px;
-  margin: 25px 10px;
+  margin: 50px 10px;
 }
 
 .large-submit-button {
@@ -271,4 +276,24 @@ h2 {
   font-size: 1em;
   margin-left: 25px;
   margin-top: 5px;
+}
+
+.collectible-title {
+  font-size: 2.5em;
+  margin-bottom: 5px;
+  margin-top: 20px;
+}
+
+.collectible-creator-back {
+  font-size: 1.2em;
+  margin-top: 5px;
+}
+
+.collectible-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.collectible-info p {
+  margin: 0;
 }

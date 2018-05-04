@@ -18,7 +18,7 @@ class Profile extends Component {
 
             {this.props.collectibles.length > 0 ? this.props.collectibles.map((collectibleArr, i) => {
               return <CollectibleFront key={i} image={collectibleArr[3]} collectible={collectibleArr}/>
-            }) : "Loading..."}
+            }) : "Buy some collectibles and they'll show up here"}
       </div>
     );
   }

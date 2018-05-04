@@ -145,11 +145,15 @@ class CollectibleBack extends Component {
   render() {
     return (
       <div className="collectible-back">
+      <div className="collectible-back-image">
         {this.props.location.state.collectible[4] ?
           <iframe width="600" height="450" src={this.props.location.state.collectible[4]}></iframe> :
           <img src={this.props.location.state.collectible[3]} height="375" width="275" alt="Missing..."></img>
         }
+      </div>
+      <div className="collectible-back-info">
         <p className="collectible-title">{this.props.location.state.collectible[1]}</p>
+        <p className="collectible-creator-back">by {this.props.location.state.collectible[8]}</p>
         <div className="buy-sell-buttons">
 
           <div className="buy">
@@ -190,12 +194,16 @@ class CollectibleBack extends Component {
 
         </div>
         <div className="collectible-info">
-          <p>Price: {Number(this.props.location.state.collectible[5].toString())/Number(1000000000000)}</p>
-          <p>ID: {this.props.location.state.collectible[0].toString()}</p>
+          <p><b>Price:</b> {Number(this.props.location.state.collectible[5].toString())/Number(1000000000000)} ETH</p>
+          <br/>
           {
+            //<p>ID: {this.props.location.state.collectible[0].toString()}</p>
+
             // <p>Owner: {this.props.location.state.collectible[6]}</p>
           }
-          <p>Owner: {this.props.location.state.collectible[6]}</p>
+          <br/>
+          <br/>
+          <p><b>Owner:</b> {this.props.location.state.collectible[6]}</p>
         </div>
         <p>{this.props.location.state.collectible[2]}</p>
 
@@ -219,6 +227,7 @@ class CollectibleBack extends Component {
         </form>
         </div>
 
+      </div>
       </div>
 
 
