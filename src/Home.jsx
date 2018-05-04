@@ -21,6 +21,7 @@ class Home extends Component {
           return col[9] == true;
 
         });
+     featured = featured.slice().reverse();
 
      var reversed = this.props.collectibles.slice().reverse();
 

@@ -194,7 +194,7 @@ class CollectibleBack extends Component {
 
         </div>
         <div className="collectible-info">
-          <p><b>Price:</b> {Number(this.props.location.state.collectible[5].toString())/Number(1000000000000)} ETH</p>
+          <p><b>Price:</b> {Number(this.props.location.state.collectible[5].toString())/Number(1000000000000000000)} ETH</p>
           <br/>
           {
             //<p>ID: {this.props.location.state.collectible[0].toString()}</p>
