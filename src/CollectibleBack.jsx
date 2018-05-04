@@ -9,6 +9,8 @@ class CollectibleBack extends Component {
    constructor(props) {
     super(props)
 
+    const BN = require('bn.js')
+
     this.giftCollectible = this.giftCollectible.bind(this);
     this.handleAddressChange = this.handleAddressChange.bind(this);
     this.handlePriceChange = this.handlePriceChange.bind(this);
@@ -99,8 +101,9 @@ class CollectibleBack extends Component {
 
   setPrice(event){
     event.preventDefault();
+    const onEth = Number(1000000000000);
       console.log("New price " + parseInt(this.state.price));
-      return this.state.collectibleInstance.setPrice(Number(this.state.identity),Number(this.state.price), {from: this.state.accounts[0]})
+      return this.state.collectibleInstance.setPrice(Number(this.state.identity),Number(this.state.price)*onEth, {from: this.state.accounts[0]})
           .then((result) =>{
             console.log(result);
           })
@@ -124,7 +127,7 @@ class CollectibleBack extends Component {
         }
         <p className="collectible-title">{this.props.location.state.collectible[1]}</p>
         <div className="collectible-info">
-          <p>Price: {this.props.location.state.collectible[5].toString()}</p>
+          <p>Price: {Number(this.props.location.state.collectible[5].toString())/Number(1000000000000)}</p>
           <p>ID: {this.props.location.state.collectible[0].toString()}</p>
           {
             // <p>Owner: {this.props.location.state.collectible[6]}</p>

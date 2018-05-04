@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import SimpleStorageContract from '../build/contracts/SimpleStorage.json'
 import Collection from '../build/contracts/Collection.json'
 import Collectible from '../build/contracts/Collectible.json'
 import getWeb3 from './utils/getWeb3'
