@@ -219,6 +219,7 @@ class App extends Component {
             <Route exact path='/' render={() => (<Home collectibles={this.state.collectibles} collectibleInstance={this.state.collectibleInstance} account={this.state.account}/>)}/>
             <Route path='/create' render={() => (<CreateCollectible{...this.state}/>)}/>
             <Route path='/collectible' component={CollectibleBack}/>
+            <Route path = '/marketplace' render ={() => (<Profile collectibles={this.state.collectibles} address = {this.state.account}/>)}/>
             <Route path = '/profile' render ={() => (<Profile collectibles={this.state.myCollectibles} address = {this.state.account}/>)}/>
           </Switch>
         </main>
